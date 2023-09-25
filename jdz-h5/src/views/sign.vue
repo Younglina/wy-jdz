@@ -15,7 +15,7 @@ const userForm = reactive({
 const submitLoading = ref(false)
 const onSubmit = () => {
   submitLoading.value = true
-  Http.get('/login').then(res=>{
+  Http.post('/login', userForm).then(res=>{
     store.setUserInfo(res.data.userInfo)
     store.addRoutes(res.data.menu, router)
     setTimeout(()=>{

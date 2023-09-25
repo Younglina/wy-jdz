@@ -3,7 +3,6 @@ import axios from 'axios'
 const Http = axios.create({
   baseURL: 'http://localhost:3000/api/',
   timeout: 20000, // 请求超时 20s
-  credentials: 'include',
   withCredentials: true,
 })
 
