@@ -2,6 +2,12 @@
 import { watch, computed, ref } from 'vue'
 import CommnetList from '@/components/commonList.vue'
 import { useStore } from '@/store'
+import { useRouter } from 'vue-router'
+import Http from '../utils/http';
+import { showSuccessToast } from 'vant'
+
+const router = useRouter()
+const store = useStore()
 // import vconsole from 'vconsole'
 // let clickCount = ref(0)
 // const watchConsole = watch(clickCount, () => {
@@ -11,11 +17,9 @@ import { useStore } from '@/store'
 //   }
 // })
 
-let likesList = ref([])
-const store = useStore()
 let userInfo = computed(() => {
   let user = store.userInfo
-  if(!user){
+  if (!user) {
     user = {
       username: '游客',
       likes: [],
@@ -26,7 +30,15 @@ let userInfo = computed(() => {
 })
 
 const onSignOut = () => {
-  store.setUserInfo(null)
+  Http.get('/logout').then((res)=>{
+    store.userInfo = null
+    store.routes = []
+    showSuccessToast(res.message)
+  })
+}
+
+const toSign = () => {
+  router.push({ path: '/sign' })
 }
 
 const active = ref(0);
@@ -44,16 +56,19 @@ const active = ref(0);
     </div>
     <van-tabs v-model:active="active" class="card">
       <van-tab title="我的喜欢">
-        <CommnetList v-if="likesList.length>0" type="myLikes" titleKey="areaName" :datalist="likesList"/>
+        <CommnetList v-if="userInfo.likes.length > 0" type="myLikes" titleKey="areaName" :datalist="userInfo.likes" />
         <van-empty v-else description="暂无喜欢" />
       </van-tab>
       <van-tab title="我的评论">
-        <CommnetList v-if="userInfo.comment.length>0" type="myComment" titleKey="areaName" :datalist="userInfo.comment"/>
+        <CommnetList v-if="userInfo.comment.length > 0" type="myComment" titleKey="areaName" :datalist="userInfo.comment" />
         <van-empty v-else description="暂无评论" />
       </van-tab>
     </van-tabs>
-    <van-button round block size="small" type="primary" @click="onSignOut">
+    <van-button v-if="userInfo.id" round block size="small" type="primary" @click="onSignOut">
       退出登录
+    </van-button>
+    <van-button v-else round block size="small" type="primary" @click="toSign">
+      登录/注册
     </van-button>
   </div>
 </template>
@@ -114,4 +129,5 @@ const active = ref(0);
       }
     }
   }
-}</style>
+}
+</style>

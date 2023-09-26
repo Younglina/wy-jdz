@@ -21,11 +21,9 @@ Http.interceptors.request.use(
 Http.interceptors.response.use(
   response => {
     if (response.data.code !== 200) {
-      console.error(
-        `Code: ${response.data.code}, Message: ${response.data.msg}`,
-      )
+      return Promise.reject(response.data)
     } else {
-      return response.data
+      return Promise.resolve(response.data)
     }
   },
   error => {

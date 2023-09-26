@@ -3,7 +3,7 @@ import { reactive, ref, computed } from 'vue'
 import { useStore } from '@/store'
 import { useRouter } from 'vue-router'
 import Http from '../utils/http';
-import { showSuccessToast } from 'vant'
+import { showSuccessToast, showFailToast } from 'vant'
 
 const router = useRouter()
 const store = useStore()
@@ -13,9 +13,9 @@ const userForm = reactive({
 })
 
 const submitLoading = ref(false)
-const onSubmit = () => {
+const onSubmit = (type) => {
   submitLoading.value = true
-  Http.post('/login', userForm).then(res=>{
+  Http.post(type === 1 ? '/login' : '/addUser', userForm).then(res=>{
     store.setUserInfo(res.data.userInfo)
     store.addRoutes(res.data.menu, router)
     setTimeout(()=>{
@@ -25,8 +25,14 @@ const onSubmit = () => {
       submitLoading.value = false
       router.push('/my')
     }, 500)
+  }).catch((err)=>{
+    showFailToast({
+      message: err.message,
+    })
+    submitLoading.value = false
   })
 }
+
 </script>
 <template>
   <div class="sign-page">
@@ -38,10 +44,10 @@ const onSubmit = () => {
           :rules="[{ required: true, message: '请填写密码' }]" />
       </van-cell-group>
       <div class="sign-action">
-        <van-button size="small" round block type="success" @click="onRegist" :loading="submitLoading" loading-text="提交中...">
+        <van-button size="small" round block type="success" @click="onSubmit(2)" :loading="submitLoading" loading-text="提交中...">
           注册
         </van-button>
-        <van-button size="small" round block type="primary" @click="onSubmit" :loading="submitLoading" loading-text="提交中...">
+        <van-button size="small" round block type="primary" @click="onSubmit(1)" :loading="submitLoading" loading-text="提交中...">
           登录
         </van-button>
       </div>

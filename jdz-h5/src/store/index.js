@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import Http from '../utils/http';
 let modules = import.meta.glob("../views/*.vue")
 
 // pinia状态管理器
@@ -7,7 +8,8 @@ export const useStore = defineStore('wyStore', {
         return {
             // 路由表
             routes: [],
-            userInfo: null
+            userInfo: null,
+            areas: []
         }
     },
     getters: {
@@ -23,7 +25,7 @@ export const useStore = defineStore('wyStore', {
                 t.push({
                     path: item.path,
                     name: item.name,
-                    component: modules[`../views/${item.component}`],
+                    component: modules[`../views/${item.component}.vue`],
                     meta: item.meta
                 })
             })
@@ -32,6 +34,11 @@ export const useStore = defineStore('wyStore', {
         },
         setUserInfo(data){
             this.userInfo = data
+        },
+        getAreas(){
+            Http.get('/getArea').then(res=>{
+                this.areas = res.data
+            })
         },
     },
     persist: {

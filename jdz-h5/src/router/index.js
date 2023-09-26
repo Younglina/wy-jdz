@@ -14,6 +14,7 @@ const router = createRouter({
   routes
 })
 
+
 router.beforeEach((to, from, next) => {
   if('Sign' === to.name){
     if(useStore().getUserInfo){
