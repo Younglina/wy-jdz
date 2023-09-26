@@ -28,6 +28,7 @@ const areas = computed(() => store.areas)
         <p>{{ item.text }}</p>
       </div>
     </div>
+    <CommonList :data="areas" />
     <!-- <CommonCard card-type="scenic" :card-data="scenic" />
     <CommonCard card-type="food" :card-data="food" />
     <CommonCard card-type="porcelain" :card-data="porcelain" /> -->

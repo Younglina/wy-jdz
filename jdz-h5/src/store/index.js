@@ -37,7 +37,7 @@ export const useStore = defineStore('wyStore', {
         },
         getAreas(){
             Http.get('/getArea').then(res=>{
-                this.areas = res.data
+                this.areas = res.data.sort((a,b)=>b.likes-a.likes)
             })
         },
     },
