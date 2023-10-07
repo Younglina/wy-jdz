@@ -42,4 +42,11 @@ router.get('/api/getArea', async (ctx) => {
   ctx.body = { code: 200, data: list, message: '获取列表成功' };
 })
 
+router.get('/api/getAreaFromType', async (ctx) => {
+  const query = ctx.request.query
+  const jsonData = require('../webdata/qunar.json')
+  ctx.body = { code: 200, data: jsonData, message: `获取${query.dataType}成功` };
+      
+})
+
 module.exports = router

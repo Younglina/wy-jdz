@@ -7,6 +7,7 @@ const routes = [
   // { path: '/detail', name: 'Detail', component: () => import('@/views/detail.vue'), meta: { title: '详情' } },
   { path: '/my', name: 'My', component: () => import('@/views/my.vue') , meta: { title: '我的', inFoot: true}},
   { path: '/sign', name: 'Sign', component: () => import('@/views/sign.vue') , meta: { title: '登录/注册'}},
+  { path: '/otherweb', name: 'Otherweb', component: () => import('@/views/otherweb.vue') , meta: { title: '网络数据', inFoot: true}},
 ]
 
 const router = createRouter({

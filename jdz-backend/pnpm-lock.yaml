@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  csvtojson:
+    specifier: ^2.0.10
+    version: 2.0.10
   dotenv:
     specifier: ^16.3.1
     version: 16.3.1
@@ -38,6 +41,10 @@ packages:
     dependencies:
       mime-types: 2.1.35
       negotiator: 0.6.3
+    dev: false
+
+  /bluebird@3.7.2:
+    resolution: {integrity: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==}
     dev: false
 
   /buffer-equal-constant-time@1.0.1:
@@ -100,6 +107,16 @@ packages:
 
   /copy-to@2.0.1:
     resolution: {integrity: sha512-3DdaFaU/Zf1AnpLiFDeNCD4TOWe3Zl2RZaTzUvWiIk5ERzcCodOE20Vqq4fzCbNoHURFHT4/us/Lfq+S2zyY4w==}
+    dev: false
+
+  /csvtojson@2.0.10:
+    resolution: {integrity: sha512-lUWFxGKyhraKCW8Qghz6Z0f2l/PqB1W3AO0HKJzGIQ5JRSlR651ekJDiGJbBT4sRNNv5ddnSGVEnsxP9XRCVpQ==}
+    engines: {node: '>=4.0.0'}
+    hasBin: true
+    dependencies:
+      bluebird: 3.7.2
+      lodash: 4.17.21
+      strip-bom: 2.0.0
     dev: false
 
   /debug@4.3.4:
@@ -278,6 +295,10 @@ packages:
     resolution: {integrity: sha512-Ks/IoX00TtClbGQr4TWXemAnktAQvYB7HzcCxDGqEZU6oCmb2INHuOoKxbtR+HFkmYWBKv/dOZtGRiAjDhj92g==}
     dev: false
 
+  /is-utf8@0.2.1:
+    resolution: {integrity: sha512-rMYPYvCzsXywIsldgLaSoPlw5PfoB/ssr7hY4pLfcodrA5M/eArza1a9VmTiNIBNMjOGr1Ow9mTyU2o69U6U9Q==}
+    dev: false
+
   /jsonwebtoken@9.0.2:
     resolution: {integrity: sha512-PRp66vJ865SSqOlgqS8hujT5U4AOgMfhrwYIuIhfKaoSCZcirrmASQr8CX7cUg+RMih+hgznrjp99o+W4pJLHQ==}
     engines: {node: '>=12', npm: '>=6'}
@@ -424,6 +445,10 @@ packages:
 
   /lodash.once@4.1.1:
     resolution: {integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==}
+    dev: false
+
+  /lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: false
 
   /long@5.2.3:
@@ -585,6 +610,13 @@ packages:
   /statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
     engines: {node: '>= 0.8'}
+    dev: false
+
+  /strip-bom@2.0.0:
+    resolution: {integrity: sha512-kwrX1y7czp1E69n2ajbG65mIo9dqvJ+8aBQXOGVxqwvNbsXdFM6Lq37dLAY3mknUwru8CfcCbfOLL/gMo+fi3g==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      is-utf8: 0.2.1
     dev: false
 
   /toidentifier@1.0.1:
