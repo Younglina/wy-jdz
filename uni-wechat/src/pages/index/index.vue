@@ -2,6 +2,22 @@
 import { computed } from 'vue'
 import { useStore } from '@/store'
 import { ImageBaseUrl, navCard } from '@/utils/useData'
+import { wxLogin, getPhoneNumber } from '@/api/user.js'
+
+const onWxLogin = async () => {
+  uni.login({
+      provider: 'weixin',
+      success: loginRes => {
+          state.wxInfo = loginRes
+          console.log(loginRes)
+          const jsCode = loginRes.code
+          wxLogin({jsCode}).then((res) => {
+              const { openId } = res.data
+              user.setUserInfo({ openId })
+          })
+      }
+  })
+}
 const toView = (key) => {
   // router.push(`/preview?type=${key}`)
 }
@@ -23,7 +39,7 @@ const setArea = () => {
         <text>{{ item.text }}</text>
       </view>
     </view> -->
-    <button @click="setArea">setArea</button>
+    <button @click="onWxLogin">setArea</button>
     <view>{{ areas }}</view>
     <!-- <CommonCard card-type="scenic" :card-data="scenic" />
     <CommonCard card-type="food" :card-data="food" />

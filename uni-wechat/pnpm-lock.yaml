@@ -47,6 +47,9 @@ dependencies:
   pinia:
     specifier: ^2.0.33
     version: 2.0.33(vue@3.2.45)
+  pinia-plugin-unistorage:
+    specifier: ^0.0.17
+    version: 0.0.17(vue@3.2.45)
   sass:
     specifier: ^1.69.0
     version: 1.69.0
@@ -5377,6 +5380,16 @@ packages:
   /pify@2.3.0:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
     engines: {node: '>=0.10.0'}
+
+  /pinia-plugin-unistorage@0.0.17(vue@3.2.45):
+    resolution: {integrity: sha512-Oo4KTWyZP+7/fRRGG5ACoFIBZznEgFt8SPSOcg99t5NHzFP1wSTAfgl25eRr7Tv11pkWyzgZSa3oMGVIBBs1MA==}
+    dependencies:
+      pinia: 2.0.33(vue@3.2.45)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - typescript
+      - vue
+    dev: false
 
   /pinia@2.0.33(vue@3.2.45):
     resolution: {integrity: sha512-HOj1yVV2itw6rNIrR2f7+MirGNxhORjrULL8GWgRwXsGSvEqIQ+SE0MYt6cwtpegzCda3i+rVTZM+AM7CG+kRg==}
