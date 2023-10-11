@@ -3,7 +3,7 @@ const router = new Router();
 const jwt = require('jsonwebtoken');
 const excuteSql = require('../utils/sql')
 const jwtMiddleware = require('../middleware/jwt');
-
+// const axios = require('axios')
 async function login(ctx, username, password){
   const userInfo = await excuteSql('getUserByNamePwd', [username, password])
   if(!userInfo.length){
@@ -34,6 +34,11 @@ async function getMenusByRoleid(ctx, rid){
 router.post('/api/login', async (ctx) => {
   await login(ctx, ctx.request.body.username, ctx.request.body.password)
 });
+
+// router.post('/api/wx/login', async (ctx) => {
+//   console.log(ctx.request.body, 'ctx.request.body.jsCode')
+//   await wxLogin(ctx, ctx.request.body.jsCode)
+// });
 
 router.get('/api/logout', jwtMiddleware, async (ctx) => {
   const user = ctx.state.user

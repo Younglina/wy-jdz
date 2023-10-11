@@ -4,7 +4,8 @@ export const useStore = defineStore('wyStore', {
     state: () => {
         return {
             userInfo: null,
-            areas: []
+            areas: [],
+            extRoutes: []
         }
     },
     getters: {
@@ -15,6 +16,9 @@ export const useStore = defineStore('wyStore', {
     actions: {
         setUserInfo(data){
             this.userInfo = data
+        },
+        addRoutes(data){
+            this.extRoutes = data
         },
         getAreas(){
             // Http.get('/getArea').then(res=>{

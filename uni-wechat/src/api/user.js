@@ -2,11 +2,12 @@
  * @description 授权登录
  * @param {*} data 
  */
-export function wxLogin(data) {
+const baseUrl = 'http://localhost:3000/api'
+export function wxLogin(jsCode) {
 	return uni.request({
-		url: '/wx/code2Session',
+		url: `${baseUrl}/wx/login`,
 		method: 'post',
-		data
+		data: {jsCode}
 	})
 }
 

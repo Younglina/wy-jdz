@@ -1,19 +1,18 @@
 <script setup>
 import { computed } from 'vue'
 import { useStore } from '@/store'
-import { ImageBaseUrl, navCard } from '@/utils/useData'
+import { ImageBaseUrl, navCard } from '@/utils/useData.js'
 import { wxLogin, getPhoneNumber } from '@/api/user.js'
 
 const onWxLogin = async () => {
   uni.login({
       provider: 'weixin',
       success: loginRes => {
-          state.wxInfo = loginRes
-          console.log(loginRes)
           const jsCode = loginRes.code
-          wxLogin({jsCode}).then((res) => {
+          console.log(jsCode)
+          wxLogin(jsCode).then((res) => {
               const { openId } = res.data
-              user.setUserInfo({ openId })
+              // user.setUserInfo({ openId })
           })
       }
   })
@@ -40,6 +39,7 @@ const setArea = () => {
       </view>
     </view> -->
     <button @click="onWxLogin">setArea</button>
+    <van-button type="primary" size="mini">按钮</van-button>
     <view>{{ areas }}</view>
     <!-- <CommonCard card-type="scenic" :card-data="scenic" />
     <CommonCard card-type="food" :card-data="food" />
