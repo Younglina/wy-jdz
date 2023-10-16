@@ -1,4 +1,4 @@
-export const ImageBaseUrl = import.meta.env.VITE_BASEURL
+export const ImageBaseUrl = 'https://younglina-1256042946.cos.ap-nanjing.myqcloud.com/'
 
 export const navCard = [
   { text: '美食', value: 'food', image: `${ImageBaseUrl}food.svg` },

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import request from '@/utils/request.js'
 // pinia状态管理器
 export const useStore = defineStore('wyStore', {
     state: () => {
@@ -21,10 +22,9 @@ export const useStore = defineStore('wyStore', {
             this.extRoutes = data
         },
         getAreas(){
-            // Http.get('/getArea').then(res=>{
-            //     this.areas = res.data.sort((a,b)=>b.likes-a.likes)
-            // })
-            this.areas = [{id:1},{id:2},{id:3},{id:4}]
+            request.get('/getArea').then(res=>{
+                this.areas = res.sort((a,b)=>b.likes-a.likes)
+            })
         },
     }
 })

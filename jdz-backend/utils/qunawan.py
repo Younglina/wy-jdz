@@ -39,7 +39,7 @@ def run_browser():
     costs = browser.find_elements(By.CSS_SELECTOR, '.sight_item_price em')
     # area_data = [["title", "data_from", "cost", "description", "tags", "introduction", "address", "open_time", "comments"]]
     area_data = []
-    for lk in range(0, 1):
+    for lk in range(0, len(links)):
         cost = costs[lk].text
         ActionChains(browser).click(links[lk]).perform()
         if(len(browser.window_handles)<2):
