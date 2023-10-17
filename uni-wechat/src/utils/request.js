@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000/api"
+const BASE_URL = "http://111.67.201.103:3001/api"
 
 const baseRequest = async (url, method, data = {}) => {
   let header = {}
