@@ -4,6 +4,7 @@ const bodyParser = require('koa-bodyparser');
 const routerRouter = require('./routers/router');
 const userRouter = require('./routers/user');
 const areaRouter = require('./routers/area');
+const vercelRouter = require('./routers/vercel');
 const { handleException } = require('./utils/handleError');
 const app = new Koa();
 
@@ -25,6 +26,8 @@ app.use(userRouter.routes())
 app.use(userRouter.allowedMethods());
 app.use(areaRouter.routes())
 app.use(areaRouter.allowedMethods());
+app.use(vercelRouter.routes())
+app.use(vercelRouter.allowedMethods());
 app.use(handleException);
 
 app.listen(3001, () => {
