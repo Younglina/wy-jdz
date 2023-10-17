@@ -23,7 +23,11 @@ export const useStore = defineStore('wyStore', {
         },
         getAreas(){
             request.get('/getArea').then(res=>{
-                this.areas = res.sort((a,b)=>b.likes-a.likes)
+                this.areas = res.sort((a,b)=>b.likes-a.likes).map(item=>{
+                    item.images = JSON.parse(item.images)
+                    item.tags = JSON.parse(item.tags)
+                    return item
+                })
             })
         },
     }

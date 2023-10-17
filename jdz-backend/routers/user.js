@@ -49,7 +49,7 @@ router.get('/api/logout', jwtMiddleware, async (ctx) => {
 });
 
 router.post('/api/addUser', jwtMiddleware, async (ctx) => {
-  const addUser = 'INSERT INTO user (username, password, rid, likes, comment) VALUES (?, ?, ?, "", "")';
+  const addUser = 'INSERT INTO jdz_user (username, password, rid, likes, comment) VALUES (?, ?, ?, "", "")';
   const params = ctx.request.body
   const creater = ctx.state.user
   const rows = await excuteSql(addUser, [params.username, params.password, creater.rid==1?params.rid:4])

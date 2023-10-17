@@ -1,7 +1,7 @@
 const getConnection = require('./mysql')
 
 const Sqls = {
-  getUserByNamePwd: 'SELECT * FROM user WHERE username = ? and password = ?',
+  getUserByNamePwd: 'SELECT * FROM jdz_user WHERE username = ? and password = ?',
   getMenusByRole: `SELECT menus.* FROM roles
   JOIN menus ON FIND_IN_SET(menus.id, roles.menus_id)
   WHERE roles.id = ?`,
