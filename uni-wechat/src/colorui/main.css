@@ -2581,7 +2581,7 @@ swiper.round-dot .uni-swiper-dot.uni-swiper-dot-active {
 }
 
 .screen-swiper-lg {
-	min-height: 360upx;
+	min-height: 40vh;
 }
 .screen-swiper image,
 .screen-swiper video,

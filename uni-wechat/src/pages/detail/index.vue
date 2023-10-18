@@ -31,9 +31,9 @@ const handleLike = () => {
 
 <template>
   <view class="detail-page">
-    <swiper v-if="detailData.images.length" class="home-swipe" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="500">
+    <swiper v-if="detailData.images.length" class="screen-swiper screen-swiper-lg" indicator-dots="true" circular="true">
       <swiper-item v-for="item in detailData.images" :key="item.name">
-        <image class="home-swipe__image" :src="ImageBaseUrl+item" mode="aspectFit" :alt="item.name"></image>
+        <image :src="ImageBaseUrl+item" mode="aspectFill" :alt="item.name"></image>
       </swiper-item>
     </swiper>
     <view v-else class="screen-swiper">暂无数据</view>
@@ -106,15 +106,14 @@ const handleLike = () => {
 </template>
 
 <style lang="scss" scoped>
-:deep.home-swipe {
-  height: 40vh;
-  width: 100%;
+.screen-swiper-lg {
   background-color: $uni-bg-color;
 }
 
 .detail-page {
   position: relative;
   height: 100vh;
+  width: 100vw;
   overflow-y: auto;
   background-color: $uni-bg-color-grey;
 }

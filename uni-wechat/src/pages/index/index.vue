@@ -32,7 +32,7 @@ const areas = computed(() => store.areas.slice(0, 10))
   <view class="home-page">
     <swiper class="screen-swiper" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
       <swiper-item v-for="item in areas" :key="item.name">
-        <image class="home-swipe__image" :src="ImageBaseUrl+item.images[0]" mode="aspectFill" :alt="item.name"></image>
+        <image :src="ImageBaseUrl+item.images[0]" mode="aspectFill" :alt="item.name"></image>
       </swiper-item>
     </swiper>
     <view class="home-page-nav">
@@ -60,7 +60,7 @@ const areas = computed(() => store.areas.slice(0, 10))
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 8px 0;
+    padding: 20rpx 0;
     text-align: center;
     &__image {
       position: relative;
