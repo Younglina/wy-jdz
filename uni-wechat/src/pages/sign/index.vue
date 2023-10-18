@@ -1,12 +1,9 @@
 <script setup>
-import { onMounted, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useStore } from '@/store'
-import { useRouter } from 'vue-router'
 import request from '@/utils/request.js'
 
-const router = useRouter()
 const store = useStore()
-const userFormRef = ref(null)
 const userForm = reactive({
   username: '',
   password: '',
@@ -17,7 +14,6 @@ const onSubmit = (type) => {
   submitLoading.value = true
   request.post(type === 1 ? '/login' : '/addUser', userForm).then(res => {
     store.setUserInfo(res.data.userInfo)
-    store.addRoutes(res.data.menu, router)
     setTimeout(() => {
       submitLoading.value = false
       uni.switchTab({ url: '/my' })

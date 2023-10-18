@@ -11,7 +11,6 @@
     "@dcloudio/uni-app": "3.0.0-3081220230817001",
     "@dcloudio/uni-components": "3.0.0-3081220230817001",
     "@dcloudio/uni-mp-weixin": "3.0.0-3081220230817001",
-    "@dcloudio/uni-ui": "^1.4.28",
     "pinia": "^2.0.33",
     "pinia-plugin-unistorage": "^0.0.17",
     "sass": "^1.69.0",

@@ -23,13 +23,12 @@ router.post('/api/addArea', jwtMiddleware, async (ctx) => {
       values.push(params[snakeToCamel(key)] || '')
     }
   })
-  console.log(addArea, values)
   await excuteSql(addArea, values)
   ctx.body = { code: 200, message: '新增成功' };
 })
 
 router.get('/api/getArea', async (ctx) => {
-  const addArea = `SELECT id, address, area_type as areaType, cost, created_at as createdAt, data_type as dataType, description, introduction, areakey, latitude, likes, longitude, location, name, open_time as openTime, phone, tags, images, updated_at as updatedAt
+  let addArea = `SELECT id, address, area_type as areaType, cost, created_at as createdAt, data_type as dataType, description, introduction, areakey, latitude, likes, longitude, location, name, open_time as openTime, phone, tags, images, updated_at as updatedAt
   FROM jdz_area
   `;
   const query = ctx.request.query
@@ -46,6 +45,21 @@ router.get('/api/getAreaFromType', async (ctx) => {
   const query = ctx.request.query
   const jsonData = require('../webdata/qunar.json')
   ctx.body = { code: 200, data: jsonData, message: `获取${query.dataType}成功` };
+      
+})
+router.get('/api/getAreaComment', async (ctx) => {
+  let sql = `SELECT area_key as areakey, area_name as areaName, content, created_at as createdAt, images, nickname, userid, id
+  FROM jdz_comment
+  `;
+  const query = ctx.request.query
+  console.log(query, query.areakey)
+  const values = []
+  if(query.areakey){
+    sql += 'WHERE area_key = ?'
+    values.push(query.areakey)
+  }
+  const list = await excuteSql(sql, values)
+  ctx.body = { code: 200, data: list, message: '获取评论成功' };
       
 })
 

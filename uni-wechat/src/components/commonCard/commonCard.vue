@@ -2,7 +2,6 @@
 import { ImageBaseUrl, navCard } from '@/utils/useData.js'
 import { computed } from 'vue'
 import { useStore } from '@/store'
-// import { showLoadingToast } from 'vant'
 
 const Strs = computed(()=>{
   const types = navCard.find(item=>item.value===props.cardType)
@@ -13,16 +12,10 @@ const props = defineProps({
 })
 const store = useStore()
 const cardData = computed(() => {
-  console.log(store.areas, props.cardType)
   return store.areas.filter(item => item.dataType === props.cardType)
 })
-const toDetail = (name) => {
-  // showLoadingToast({
-  //   message: '加载中...',
-  //   duration: 0,
-  //   loadingType: 'spinner',
-  // });
-  uni.switchTab({ url: '/detail', query: { name, dataType: props.cardType } })
+const toDetail = (areakey) => {
+  uni.navigateTo({ url: `/pages/detail/index?areakey=${areakey}&dataType=${props.cardType}`})
 }
 </script>
 
@@ -30,7 +23,7 @@ const toDetail = (name) => {
   <view class="common-card">
     <text class="wy-title">特色{{ Strs }}</text>
     <view scroll-x="true" scroll-y="true" class="card-body">
-      <view v-for="item in cardData.slice(0, 10)" class="card-body__item" :key="item.name" @click="toDetail(item.key)">
+      <view v-for="item in cardData.slice(0, 10)" class="card-body__item" :key="item.name" @click="toDetail(item.areakey)">
         <image class="card-body__image" :src="ImageBaseUrl+item.images[0]" alt=""></image>
         <view class="card-body__name">{{ item.name }}</view>
         <view class="card-body__desc subtext">{{ item.description }}</view>
