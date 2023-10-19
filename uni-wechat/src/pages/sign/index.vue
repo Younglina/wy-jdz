@@ -38,10 +38,10 @@ const onSubmit = (type) => {
       </view>
     </view>
     <view class="sign-action">
-      <button size="mini" @click="onSubmit(2)" :loading="submitLoading" class="cu-btn round bg-green">
+      <button size="mini" @click="onSubmit(2)" class="cu-btn round bg-green">
         注册
       </button>
-      <button size="mini" @click="onSubmit(1)" :loading="submitLoading" class="cu-btn round bg-blue margin-left">
+      <button size="mini" @click="onSubmit(1)" class="cu-btn round bg-blue margin-left">
         登录
       </button>
     </view>

@@ -26,6 +26,12 @@
 			"style": {
 				"navigationBarTitleText": "详情"
 			}
+		},
+		{
+			"path": "pages/comment/index",
+			"style": {
+				"navigationBarTitleText": "评论"
+			}
 		}
 	],
 	"tabBar": {

@@ -1,5 +1,5 @@
-const BASE_URL = "https://www.fastmock.site/mock/b4d00c361872b35cd786f9536d504667/jdz/api"
-// const BASE_URL = "http://localhost:3001/api"
+// const BASE_URL = "https://www.fastmock.site/mock/b4d00c361872b35cd786f9536d504667/jdz/api"
+const BASE_URL = "http://localhost:3001/api"
 
 const baseRequest = async (url, method, data = {}) => {
   let header = {}

@@ -1,5 +1,6 @@
 <script setup>
 import { ImageBaseUrl } from '@/utils/useData.js'
+import { makeCall } from '@/utils/useUtils.js'
 import { useStore } from '@/store'
 import { ref } from 'vue'
 import { onLoad } from "@dcloudio/uni-app";
@@ -8,16 +9,15 @@ import CommentList from '@/components/CommentList/CommentList.vue'
 
 const store = useStore()
 const showMore = ref(false)
-const detailData = ref({images:[]})
+const detailData = ref({ images: [] })
 const loading = ref(true)
 
 const aryComment = ref([])
 onLoad(async (options) => {
   detailData.value = store.areas.find(item => item.areakey === options.areakey)
-  const areaCommnet = await request.get('/getAreaComment', {areakey: options.areakey})
+  const areaCommnet = await request.get('/getAreaComment', { areakey: options.areakey })
   const mockComment = await request.get('/mock/commend')
   aryComment.value = (areaCommnet || []).concat(mockComment || [])
-  aryComment.value.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt))
   loading.value = false
 })
 
@@ -27,13 +27,29 @@ const handleLike = () => {
   isLike.value = !isLike.value
 }
 
+const toComment = () => {
+  uni.navigateTo({
+    url: `/pages/comment/index?areaKey=${detailData.value.areakey}&areaName=${detailData.value.name}&dataType=${detailData.value.dataType}`
+  })
+}
+
+const toLocation = () => {
+  const { latitude, longitude, name, address } = detailData.value
+  uni.openLocation({
+    latitude: +latitude,
+    longitude: +longitude,
+    name: name,
+    address: address
+  })
+}
+
 </script>
 
 <template>
   <view class="detail-page">
     <swiper v-if="detailData.images.length" class="screen-swiper screen-swiper-lg" indicator-dots="true" circular="true">
       <swiper-item v-for="item in detailData.images" :key="item.name">
-        <image :src="ImageBaseUrl+item" mode="aspectFill" :alt="item.name"></image>
+        <image :src="ImageBaseUrl + item" mode="aspectFill" :alt="item.name"></image>
       </swiper-item>
     </swiper>
     <view v-else class="screen-swiper">暂无数据</view>
@@ -42,7 +58,8 @@ const handleLike = () => {
       <view class="detail-info">
         <view class="detail-info__title">
           <text>{{ detailData.name }}</text>
-          <text @click="handleLike" :class="[isLike ? 'cuIcon-likefill' : 'cuIcon-like', isLike ?'text-red':'text-gray']"></text>
+          <text @click="handleLike"
+            :class="[isLike ? 'cuIcon-likefill' : 'cuIcon-like', isLike ? 'text-red' : 'text-gray']"></text>
         </view>
         <divider />
         <view class="detail-info__address">
@@ -60,12 +77,11 @@ const handleLike = () => {
             </view>
           </view>
           <view class="detail-info__action">
-            <view @click="showAction = !showAction">
+            <view @click="toLocation">
               <text class="cuIcon-location"></text>
               <text>地图</text>
             </view>
-            <view v-if="detailData.phone" @click="showCall">
-              <a :href="`tel:${detailData.phone}`" ref="phoneCall" style="display: none;"></a>
+            <view v-if="detailData.phone" @click="makeCall(detailData.phone)">
               <text class="cuIcon-phone"></text>
               <text>电话</text>
             </view>
@@ -77,18 +93,19 @@ const handleLike = () => {
         <text class="wy-title">介绍</text>
         <template v-if="detailData.introduction">
           <text class="detail-info__intor">{{ detailData.introduction?.slice(0, 50) + '...' }}</text>
-          <view v-if="detailData.introduction.length > 50" class="detail-info__showmore" @click="()=>{showMore = !showMore}">
+          <view v-if="detailData.introduction.length > 50" class="detail-info__showmore"
+            @click="() => { showMore = !showMore }">
             <text>查看更多</text>
           </view>
-          <view :class="['cu-modal', showMore?'show':'']">
+          <view :class="['cu-modal', showMore ? 'show' : '']">
             <view class="cu-dialog">
               <view class="cu-bar bg-white justify-end">
-                <view class="action" @click="()=>{showMore=false}">
+                <view class="action" @click="() => { showMore = false }">
                   <text class="cuIcon-close text-red"></text>
                 </view>
               </view>
               <view class="padding">
-                <view class="detail-info__modal">{{detailData.introduction}}</view>
+                <view class="detail-info__modal">{{ detailData.introduction }}</view>
               </view>
             </view>
           </view>
@@ -143,6 +160,7 @@ const handleLike = () => {
     display: flex;
     font-size: 30rpx;
     justify-content: space-between;
+
     >text {
       flex: 1;
     }
@@ -156,8 +174,8 @@ const handleLike = () => {
     font-size: 28rpx;
 
     >view {
-      min-width: 28px;
-      padding: 0 4px;
+      min-width: 50rpx;
+      padding-left: 6rpx;
     }
   }
 
@@ -187,7 +205,7 @@ const handleLike = () => {
     text-overflow: ellipsis;
   }
 
-  &__modal{
+  &__modal {
     font-size: 30rpx;
     text-indent: 2em;
     text-align: left;
@@ -200,5 +218,4 @@ const handleLike = () => {
     right: 10px;
     color: $uni-color-primary;
   }
-}
-</style>
+}</style>

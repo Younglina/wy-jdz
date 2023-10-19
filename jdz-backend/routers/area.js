@@ -47,20 +47,26 @@ router.get('/api/getAreaFromType', async (ctx) => {
   ctx.body = { code: 200, data: jsonData, message: `获取${query.dataType}成功` };
       
 })
+
+router.post('/api/addAreaComment', async (ctx) => {
+  const data = ctx.request.body
+  console.log(data)
+  ctx.body = { code: 200, message: '新增评论成功' };
+})
+
 router.get('/api/getAreaComment', async (ctx) => {
   let sql = `SELECT area_key as areakey, area_name as areaName, content, created_at as createdAt, images, nickname, userid, id
   FROM jdz_comment
   `;
   const query = ctx.request.query
-  console.log(query, query.areakey)
   const values = []
   if(query.areakey){
     sql += 'WHERE area_key = ?'
     values.push(query.areakey)
   }
   const list = await excuteSql(sql, values)
+  list.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
   ctx.body = { code: 200, data: list, message: '获取评论成功' };
-      
 })
 
 module.exports = router
