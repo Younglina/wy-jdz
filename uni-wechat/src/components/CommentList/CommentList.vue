@@ -17,7 +17,6 @@ const verify = ref(false)
 //   }
 // })
 
-
 const imagePreview = (imgs, idx) => {
   uni.previewImage({
     urls: imgs.map(item => item = ImageBaseUrl + item)
@@ -39,7 +38,7 @@ const handleListClick = (item) => {
         </view>
         <view>
           <text class="detail-comment__username">{{ item[titleKey] }}</text>
-          <text class="detail-comment__time">{{ item.createdAt }}</text>
+          <view class="detail-comment__time">{{ item.createdAt }}</view>
         </view>
         <view v-if="verify" style="margin-left: auto;">
           <button @click="$emit('verify', item)" size="mini">审核</button>
@@ -55,17 +54,19 @@ const handleListClick = (item) => {
       <divider></divider>
     </view>
   </view>
-  <view class="empty">
+  <view v-else class="empty">
     <image src="@/static/empty.png"></image>
     <view>暂无数据</view>
   </view>
 </template>
 <style scoped lang='scss'>
 .detail-comment {
-  padding: 10rpx;
+  padding: 20rpx;
+  background-color: #fff;
 
   &__user {
     display: flex;
+    align-items: flex-end;
   }
 
   &__avatar {
@@ -76,7 +77,8 @@ const handleListClick = (item) => {
   }
 
   &__username {
-    font-size: 30rpx;
+    font-weight: 500;
+    font-size: 28rpx;
     margin-right: 10rpx;
   }
 
@@ -86,7 +88,7 @@ const handleListClick = (item) => {
   }
 
   &__content {
-    font-size: 28rpx;
+    font-size: 26rpx;
     padding-top: 4px;
   }
 

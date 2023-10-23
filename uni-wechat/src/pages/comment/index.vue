@@ -54,7 +54,7 @@ const delImg = () => {
       <textarea maxlength="500" v-model="commentContent" placeholder="说点什么吧~"></textarea>
     </view>
     <divider />
-    <view class="cu-bar bg-white margin-top">
+    <!-- <view class="cu-bar bg-white margin-top">
       <view class="action">
         上传图片
       </view>
@@ -75,8 +75,8 @@ const delImg = () => {
         </view>
       </view>
     </view>
-    <divider />
-    <view class="cu-form-group">
+    <divider /> -->
+    <view class="cu-form-group flex justify-center">
       <button size="mini" @click="submitComment(2)" class="cu-btn round bg-green">
         取消
       </button>

@@ -21,7 +21,7 @@ const onSubmit = (type) => {
   }).catch((err) => {
     uni.showToast({
       icon: 'error',
-      title: err
+      title: err.message
     })
     submitLoading.value = false
   })

@@ -16,7 +16,7 @@ const isLike = ref(false)
 const aryComment = ref([])
 onLoad(async (options) => {
   detailData.value = store.areas.find(item => item.areakey === options.areakey)
-  if(store.userInfo && store.userInfo.likes.includes(options.areaKey)){
+  if(store.userInfo && store.userInfo.likes.includes(options.areakey)){
     isLike.value = true
   }
   const areaCommnet = await request.get('/getAreaComment', { areakey: options.areakey })

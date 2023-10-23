@@ -6,7 +6,7 @@ export const useStore = defineStore('wyStore', {
         return {
             userInfo: null,
             areas: [],
-            extRoutes: []
+            extRoutes: [],
         }
     },
     getters: {
@@ -15,8 +15,11 @@ export const useStore = defineStore('wyStore', {
         }
     },
     actions: {
-        setUserInfo(data){
+        async setUserInfo(data){
             this.userInfo = data
+            request.get('/getAreaComment', { userid: this.userInfo.id}).then(res=>{
+                this.userInfo.comments = res
+            })
         },
         async handleLike(areakey){
             const likes = this.userInfo.likes || []

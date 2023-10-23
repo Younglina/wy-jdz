@@ -3,25 +3,28 @@ import { computed, ref } from 'vue'
 import { ImageBaseUrl, randomAvatar } from '@/utils/useUtils.js'
 import { useStore } from '@/store'
 import CommentList from '@/components/CommentList/CommentList.vue'
+
 let likesList = ref([])
 
 const store = useStore()
+const randomAvatarColor = randomAvatar[Math.floor(Math.random()*9)]
 let userInfo = computed(() => {
   const info = store.userInfo?{...store.userInfo}:{
     likes: [],
-    comment: [],
+    comments: [],
     username: '游客'
   }
   if (info) {
     info.avatar = info.avatar?(ImageBaseUrl + info.avatar):''
     if(info.likes.length>0){
       const arr = store.areas.filter(item=>info.likes.includes(item.areakey))
+      console.log(arr, store.areas, 'store.areas')
       likesList.value = arr.map(item=>{
         return {
           areaName: item.name, // 中文名 展示用
           areakey: item.areakey, // key值 对应列表查询用
           dataType: item.dataType, // food||scenic等 对应列表查询用
-          content: item.introduce, // 描述
+          content: item.description, // 描述
         }
       })
     }
@@ -31,9 +34,9 @@ let userInfo = computed(() => {
 
 const onSignOut = () => {
   store.userInfo = null
-  const piniaData = JSON.parse(localStorage.getItem('china-pinia-info'))
+  const piniaData = JSON.parse(window.localStorage.getItem('china-pinia-info'))
   piniaData.userInfo = null
-  localStorage.setItem('china-pinia-info', JSON.stringify(piniaData))
+  window.localStorage.setItem('china-pinia-info', JSON.stringify(piniaData))
 }
 
 const curTab = ref(0);
@@ -49,12 +52,12 @@ const toSign = () => {
   <view v-if="userInfo" class="userinfo">
     <view class="userinfo-base card">
       <image v-if="userInfo.avatar" :src="userInfo.avatar" alt="头像" @click="clickCount++"></image>
-      <view v-else class="userinfo-avatar" :style="{ backgroundImage: randomAvatar[Math.floor(Math.random()*9)] }">
+      <view v-else class="userinfo-avatar" :style="{ backgroundImage: randomAvatarColor}">
       </view>
       <view class="userinfo-username">{{ userInfo.username }}</view>
       <view class="userinfo-ext">
         <view>{{ userInfo.likes.length }} 喜欢</view>
-        <view>{{ userInfo.comment.length }} 评论</view>
+        <view>{{ userInfo.comments.length }} 评论</view>
       </view>
     </view>
 		<scroll-view scroll-x class="bg-white nav">
@@ -67,9 +70,9 @@ const toSign = () => {
 				</view>
 			</view>
 		</scroll-view>
-    <CommentList v-show="curTab==0" type="myLikes" titleKey="areaName" :datalist="userInfo.likes"/>
-    <CommentList v-show="curTab==1" type="myComment" titleKey="areaName" :datalist="userInfo.comment"/>
-    <view v-if="userInfo.id" >
+    <CommentList v-show="curTab==0" type="myLikes" titleKey="areaName" :datalist="likesList"/>
+    <CommentList v-show="curTab==1" type="myComment" titleKey="areaName" :datalist="userInfo.comments"/>
+    <view v-if="userInfo.id" class="flex padding-top justify-center">
       <button round class="cu-btn round" @click="onSignOut">
         退出登录
       </button>

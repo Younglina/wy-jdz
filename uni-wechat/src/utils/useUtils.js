@@ -15,16 +15,16 @@ export function makeCall(p){
 
 export async function useComment(dData, commentContent, imgList){
   const store = useStore()
-  // if (!store.userInfo) {
-  //   uni.showToast({
-  //     title: '请去我的页面进行登录或注册',
-  //     icon: 'fail'
-  //   })
-  //   return
-  // }
+  if (!store.userInfo) {
+    uni.showToast({
+      title: '请登录或注册',
+      icon: 'fail'
+    })
+    return
+  }
   if (!commentContent && !imgList.length) {
     uni.showToast({
-      title: '还没有填写内容或图片哦',
+      title: '没有内容或图片',
       icon: 'fail'
     })
     return
@@ -45,6 +45,8 @@ export async function useComment(dData, commentContent, imgList){
   // await submitData('verify', { ...commentData, "nickname": store.userInfo.username, "userid": store.userInfo.userid, areaKey: dData.areaKey, areaName: dData.areaName, dataType: dData.dataType })
   await Http.post('/addAreaComment', {
     ...commentData,
+    ...dData,
+    userid: store.userInfo.id
   })
   // Http.post(import.meta.env.VITE_MAIL,
   // { subject: `${store.userInfo.username}-评论-${areaName}`, text: commentObj.content },

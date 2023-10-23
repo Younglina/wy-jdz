@@ -12,7 +12,7 @@ router.post('/api/addArea', jwtMiddleware, async (ctx) => {
   if(creater.rid != 1){
     ctx.body = { code: 401, message: '没有权限' };
   }
-  const keys = `address, area_type, cost, created_at, data_type, description, introduction, areakey, latitude, likes, longitude, location, name, open_time, phone, tags, images, updated_at`
+  const keys = `address, area_type, cost, created_at, data_type, description, introduction, area_key, latitude, likes, longitude, location, name, open_time, phone, tags, images, updated_at`
   const addArea = `INSERT INTO jdz_area (${keys}) VALUES (${keys.split(',').map(_=>`?`).join(', ')})`;
   const values = []
   const params = ctx.request.body
@@ -28,7 +28,7 @@ router.post('/api/addArea', jwtMiddleware, async (ctx) => {
 })
 
 router.get('/api/getArea', async (ctx) => {
-  let addArea = `SELECT id, address, area_type as areaType, cost, created_at as createdAt, data_type as dataType, description, introduction, areakey, latitude, likes, longitude, location, name, open_time as openTime, phone, tags, images, updated_at as updatedAt
+  let addArea = `SELECT id, address, area_type as areaType, cost, created_at as createdAt, data_type as dataType, description, introduction, area_key as areakey, latitude, likes, longitude, location, name, open_time as openTime, phone, tags, images, updated_at as updatedAt
   FROM jdz_area
   `;
   const query = ctx.request.query
@@ -50,21 +50,18 @@ router.get('/api/getAreaFromType', async (ctx) => {
 
 router.post('/api/addAreaComment', async (ctx) => {
   const data = ctx.request.body
-  console.log(data)
-  ctx.body = { code: 200, message: '新增评论成功' };
+  const res = await excuteSql('addAreaComment', [data.areaKey, data.content, new Date(), data.images.length?data.images:"[]", data.userid])
+  ctx.body = { code: 200, message: res.message || '新增评论成功', success: !!res.code };
 })
 
 router.get('/api/getAreaComment', async (ctx) => {
-  let sql = `SELECT area_key as areakey, area_name as areaName, content, created_at as createdAt, images, nickname, userid, id
-  FROM jdz_comment
-  `;
   const query = ctx.request.query
-  const values = []
+  let list = []
   if(query.areakey){
-    sql += 'WHERE area_key = ?'
-    values.push(query.areakey)
+    list = await excuteSql('getAreaCommentByArea', [query.areakey])
+  }else{
+    list = await excuteSql('getAreaCommentByUser', [query.userid])
   }
-  const list = await excuteSql(sql, values)
   list.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
   ctx.body = { code: 200, data: list, message: '获取评论成功' };
 })
