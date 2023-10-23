@@ -17,4 +17,7 @@ export default {
 @import "colorui/main.css";
 @import "colorui/icon.css";
 @import "./uni.scss";
+page{
+  background-color: $uni-abg-color;
+}
 </style>

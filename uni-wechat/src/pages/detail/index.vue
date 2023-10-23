@@ -1,5 +1,5 @@
 <script setup>
-import { ImageBaseUrl } from '@/utils/useData.js'
+import { ImageBaseUrl } from '@/utils/useUtils.js'
 import { makeCall } from '@/utils/useUtils.js'
 import { useStore } from '@/store'
 import { ref } from 'vue'
@@ -12,19 +12,36 @@ const showMore = ref(false)
 const detailData = ref({ images: [] })
 const loading = ref(true)
 
+const isLike = ref(false)
 const aryComment = ref([])
 onLoad(async (options) => {
   detailData.value = store.areas.find(item => item.areakey === options.areakey)
+  if(store.userInfo && store.userInfo.likes.includes(options.areaKey)){
+    isLike.value = true
+  }
   const areaCommnet = await request.get('/getAreaComment', { areakey: options.areakey })
   const mockComment = await request.get('/mock/commend')
   aryComment.value = (areaCommnet || []).concat(mockComment || [])
   loading.value = false
 })
 
-const isLike = ref(false)
-const handleLike = () => {
-  store.like(detailData.value.areakey)
-  isLike.value = !isLike.value
+const handleLike = async () => {
+  if(!store.userInfo){
+    uni.showToast({
+      title: '请先登录',
+      icon: 'error'
+    })
+  }
+  try{
+    const res = await store.handleLike(detailData.value.areakey)
+    isLike.value = store.userInfo.likes.includes(detailData.value.areakey)
+  }catch(err){
+    console.log(err)
+    uni.showToast({
+      icon: 'error',
+      title: err
+    })
+  }
 }
 
 const toComment = () => {
@@ -132,7 +149,6 @@ const toLocation = () => {
   height: 100vh;
   width: 100vw;
   overflow-y: auto;
-  background-color: $uni-bg-color-grey;
 }
 
 .detail-container {

@@ -9,6 +9,7 @@ const baseRequest = async (url, method, data = {}) => {
       method: method || 'GET',
       header: header,
       timeout: 10000,
+      withCredentials: true,
       data: data || {},
       success: (successData) => {
         const res = successData.data

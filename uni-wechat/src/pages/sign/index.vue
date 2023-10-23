@@ -12,14 +12,17 @@ const userForm = reactive({
 const submitLoading = ref(false)
 const onSubmit = (type) => {
   submitLoading.value = true
-  request.post(type === 1 ? '/login' : '/addUser', userForm).then(res => {
-    store.setUserInfo(res.data.userInfo)
+  request.post(type === 1 ? '/login' : '/signUser', userForm).then(res => {
+    store.setUserInfo(res.userInfo)
     setTimeout(() => {
       submitLoading.value = false
-      uni.switchTab({ url: '/my' })
+      uni.switchTab({ url: '/pages/my/index' })
     }, 500)
   }).catch((err) => {
-    console.log(err)
+    uni.showToast({
+      icon: 'error',
+      title: err
+    })
     submitLoading.value = false
   })
 }
@@ -57,18 +60,20 @@ const onSubmit = (type) => {
   background-image: url(https://younglina-1256042946.cos.ap-nanjing.myqcloud.com/yyc_3.jpeg);
   background-size: cover;
   background-position: center;
-  .sign-form{
-    background-color: rgba(255,255,255);
+
+  .sign-form {
+    background-color: rgba(255, 255, 255);
     padding: 8px;
     border-radius: 4px;
   }
+
   .sign-action {
     margin: 16px;
     display: flex;
   }
 }
-.cu-form-group{
+
+.cu-form-group {
   position: relative;
 }
-
 </style>

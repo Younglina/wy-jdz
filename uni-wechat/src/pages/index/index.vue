@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useStore } from '@/store'
-import { ImageBaseUrl, navCard } from '../../utils/useData.js'
+import { ImageBaseUrl, navCard } from '../../utils/useUtils.js'
 import CommonCard from '@/components/CommonCard/CommonCard.vue'
 // const ImageBaseUrl = 'https://younglina-1256042946.cos.ap-nanjing.myqcloud.com/'
 

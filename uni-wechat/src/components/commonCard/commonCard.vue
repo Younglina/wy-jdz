@@ -1,5 +1,5 @@
 <script setup>
-import { ImageBaseUrl, navCard } from '@/utils/useData.js'
+import { ImageBaseUrl, navCard } from '@/utils/useUtils.js'
 import { computed } from 'vue'
 import { useStore } from '@/store'
 

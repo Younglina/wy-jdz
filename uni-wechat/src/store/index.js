@@ -18,6 +18,18 @@ export const useStore = defineStore('wyStore', {
         setUserInfo(data){
             this.userInfo = data
         },
+        async handleLike(areakey){
+            const likes = this.userInfo.likes || []
+            let likeCount = 0
+            if(likes.includes(areakey)){
+                likes.splice(likes.indexOf(areakey),1)
+                likeCount-=1
+            }else{
+                likes.push(areakey)
+                likeCount+=1
+            }
+            return request.post('/updateLikes', { userId: this.userInfo.id, likes: JSON.stringify(likes), areakey, likeCount })
+        },
         addRoutes(data){
             this.extRoutes = data
         },

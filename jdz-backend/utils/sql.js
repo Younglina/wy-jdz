@@ -5,9 +5,9 @@ const Sqls = {
   getMenusByRole: `SELECT menus.* FROM roles
   JOIN menus ON FIND_IN_SET(menus.id, roles.menus_id)
   WHERE roles.id = ?`,
-  upLoginStatus: `UPDATE user
-	SET login_status=?
-	WHERE id = ?`
+  upLoginStatus: `UPDATE jdz_user SET login_status=? WHERE id = ?`,
+  upUserLikes: `UPDATE jdz_user SET likes=? WHERE id = ?`,
+  upAreaLikes: `UPDATE jdz_area SET likes=likes+? WHERE areakey = ?`
 }
 
 const excuteSql = async (fn, values) => {
