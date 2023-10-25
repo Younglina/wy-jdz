@@ -16,13 +16,13 @@ const submitComment = async (t) => {
   if(submitLoading.value) return
   submitLoading.value = true
   console.log(queryObj,'queryObj')
-  await useComment(queryObj, commentContent.value, imgList.value)
+  await useComment(queryObj, commentContent.value, [...imgList.value])
   submitLoading.value = false
 }
 
 const previewImage = (e) => {
   uni.previewImage({
-    urls: imgList.value.map(item=>item.path),
+    urls: imgList.value,
     current: e.currentTarget.dataset.url
   });
 }
@@ -35,9 +35,9 @@ const chooseImage = () => {
     success: (res) => {
       console.log(res)
       if (imgList.value.length != 0) {
-        imgList.value = imgList.value.concat(res.tempFiles)
+        imgList.value = imgList.value.concat(res.tempFilePaths)
       } else {
-        imgList.value = res.tempFiles
+        imgList.value = res.tempFilePaths
       }
     }
   });
@@ -54,7 +54,7 @@ const delImg = () => {
       <textarea maxlength="500" v-model="commentContent" placeholder="说点什么吧~"></textarea>
     </view>
     <divider />
-    <!-- <view class="cu-bar bg-white margin-top">
+    <view class="cu-bar bg-white margin-top">
       <view class="action">
         上传图片
       </view>
@@ -64,8 +64,8 @@ const delImg = () => {
     </view>
     <view class="cu-form-group">
       <view class="grid col-4 grid-square flex-sub">
-        <view class="bg-img" v-for="(item, index) in imgList" :key="index" @click="previewImage" :data-url="imgList[index].path">
-          <image :src="imgList[index].path" mode="aspectFill"></image>
+        <view class="bg-img" v-for="(item, index) in imgList" :key="index" @click="previewImage" :data-url="item">
+          <image :src="item" mode="aspectFill"></image>
           <view class="cu-tag bg-red" @click.stop="delImg" :data-index="index">
             <text class='cuIcon-close'></text>
           </view>
@@ -75,7 +75,7 @@ const delImg = () => {
         </view>
       </view>
     </view>
-    <divider /> -->
+    <divider />
     <view class="cu-form-group flex justify-center">
       <button size="mini" @click="submitComment(2)" class="cu-btn round bg-green">
         取消

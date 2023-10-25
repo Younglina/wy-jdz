@@ -32,20 +32,17 @@ export async function useComment(dData, commentContent, imgList){
   uni.showLoading({
     title: '提交中...'
   })
-  let commentImages = []
-  if (imgList.length) {
-    console.log(imgList)
-    commentImages = imgList.map(item => `${dData.areaKey}_${+new Date()}_${item.path}`)
-  }
-  const commentData = {
-    "content": commentContent,
-    "images": commentImages,
-  }
-  console.log(commentData)
-  // await submitData('verify', { ...commentData, "nickname": store.userInfo.username, "userid": store.userInfo.userid, areaKey: dData.areaKey, areaName: dData.areaName, dataType: dData.dataType })
+  const uploadImgs = []
+  console.log(imgList, [...imgList], 'imgList')
+  imgList.map(item=>{
+    console.log(item, typeof item, 'item')
+    const res = uni.getFileSystemManager().readFileSync(item, 'base64')
+    uploadImgs.push({ filename: `${'wzq1'}_${+new Date()}_${item.split('/').at(-1)}`, file: res })
+  })
   await Http.post('/addAreaComment', {
-    ...commentData,
     ...dData,
+    content: commentContent,
+    images: uploadImgs,
     userid: store.userInfo.id
   })
   // Http.post(import.meta.env.VITE_MAIL,
@@ -55,7 +52,6 @@ export async function useComment(dData, commentContent, imgList){
   // }).then(res => {
   //   console.log(res)
   // })
-  // uploadImage(dData.areaKey, imgList, +commentDate)
   uni.hideLoading()
   uni.showToast({
     title: '审核后将会显示',

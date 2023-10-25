@@ -1,6 +1,7 @@
 const Router = require('koa-router');
 const router = new Router();
 const excuteSql = require('../utils/sql')
+const uploadFiles = require('../utils/useCos')
 const jwtMiddleware = require('../middleware/jwt');
 
 function snakeToCamel(str) {
@@ -50,7 +51,10 @@ router.get('/api/getAreaFromType', async (ctx) => {
 
 router.post('/api/addAreaComment', async (ctx) => {
   const data = ctx.request.body
-  const res = await excuteSql('addAreaComment', [data.areaKey, data.content, new Date(), data.images.length?data.images:"[]", data.userid])
+  console.log(data)
+  const res = {}
+  await excuteSql('addAreaComment', [data.areaKey, data.content, new Date(), JSON.stringify(data.images.map(item=>item.filename)), data.userid])
+  uploadFiles(data.images)
   ctx.body = { code: 200, message: res.message || '新增评论成功', success: !!res.code };
 })
 
@@ -63,7 +67,14 @@ router.get('/api/getAreaComment', async (ctx) => {
     list = await excuteSql('getAreaCommentByUser', [query.userid])
   }
   list.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+  list.map(item=>{
+    if(item.id>39){
+      item.images = item.images.map(img=>'wechat/'+img)
+    }
+    return item
+  })
   ctx.body = { code: 200, data: list, message: '获取评论成功' };
 })
+
 
 module.exports = router
