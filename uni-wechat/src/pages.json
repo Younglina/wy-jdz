@@ -2,17 +2,17 @@
 	"easycom": {
 		"autoscan": true
 	},
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/my/index",
-			"style": {
-				"navigationBarTitleText": "我的"
-			}
-		},
+	"pages": [
 		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "首页"
+			}
+		},
+		{
+			"path": "pages/my/index",
+			"style": {
+				"navigationBarTitleText": "我的"
 			}
 		},
 		{
@@ -21,12 +21,6 @@
 				"navigationBarTitleText": "注册/登录"
 			}
 		},
-		// {
-		// 	"path": "pages/other-web/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "其他来源"
-		// 	}
-		// },
 		{
 			"path": "pages/detail/index",
 			"style": {
@@ -41,24 +35,26 @@
 		}
 	],
 	"tabBar": {
+		"color": "#333333",
+		"selectedColor": "#1cbbb4",
 		"list": [
 			{
 				"pagePath": "pages/index/index",
-				"text": "首页"
+				"text": "首页",
+				"iconPath": "static/home.png",
+				"selectedIconPath": "static/home_active.png"
 			},
-			// {
-			// 	"pagePath": "pages/other-web/index",
-			// 	"text": "来源"
-			// },
 			{
 				"pagePath": "pages/my/index",
-				"text": "我的"
+				"text": "我的",
+				"iconPath": "static/my.png",
+				"selectedIconPath": "static/my_active.png"
 			}
 		]
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "wy-jdz",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	}
