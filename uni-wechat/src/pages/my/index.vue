@@ -7,7 +7,7 @@ import CommentList from '@/components/CommentList/CommentList.vue'
 let likesList = ref([])
 
 const store = useStore()
-const randomAvatarColor = randomAvatar[Math.floor(Math.random()*9)]
+const randomAvatarColor = ref(randomAvatar[Math.floor(Math.random()*9)])
 let userInfo = computed(() => {
   const info = store.userInfo?{...store.userInfo}:{
     likes: [],
@@ -18,7 +18,6 @@ let userInfo = computed(() => {
     info.avatar = info.avatar?(ImageBaseUrl + info.avatar):''
     if(info.likes.length>0){
       const arr = store.areas.filter(item=>info.likes.includes(item.areakey))
-      console.log(arr, store.areas, 'store.areas')
       likesList.value = arr.map(item=>{
         return {
           areaName: item.name, // 中文名 展示用
@@ -34,9 +33,7 @@ let userInfo = computed(() => {
 
 const onSignOut = () => {
   store.userInfo = null
-  const piniaData = JSON.parse(window.localStorage.getItem('china-pinia-info'))
-  piniaData.userInfo = null
-  window.localStorage.setItem('china-pinia-info', JSON.stringify(piniaData))
+  likesList.value = []
 }
 
 const curTab = ref(0);
