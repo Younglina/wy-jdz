@@ -16,6 +16,12 @@
 			}
 		},
 		{
+			"path": "pages/area-card/index",
+			"style": {
+				"navigationBarTitleText": "特色"
+			}
+		},
+		{
 			"path": "pages/sign/index",
 			"style": {
 				"navigationBarTitleText": "注册/登录"

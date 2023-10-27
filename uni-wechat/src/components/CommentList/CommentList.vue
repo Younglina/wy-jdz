@@ -25,7 +25,7 @@ const imagePreview = (imgs, idx) => {
 
 const handleListClick = (item) => {
   if (props.type !== 'detail') {
-    uni.navigateTo({ url: `/pages/detail/index?name=${item.key || item.areakey}&dataType=${item.dataType}`})
+    uni.navigateTo({ url: `/pages/detail/index?areakey=${item.areakey}`})
   }
 }
 

@@ -5,8 +5,8 @@ import request from '@/utils/request.js'
 
 const store = useStore()
 const userForm = reactive({
-  username: '',
-  password: '',
+  username: 'test',
+  password: 'test',
 })
 
 const submitLoading = ref(false)

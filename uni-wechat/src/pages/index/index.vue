@@ -20,8 +20,8 @@ import CommonCard from '@/components/CommonCard/CommonCard.vue'
 //       }
 //   })
 // }
-const toView = (key) => {
-  // router.push(`/preview?type=${key}`)
+const toView = (item) => {
+  uni.navigateTo({url: `/pages/area-card/index?dataType=${item.value}&typeStr=${item.text}`})
 }
 const store = useStore()
 store.getAreas()
@@ -36,7 +36,7 @@ const areas = computed(() => store.areas.slice(0, 10))
       </swiper-item>
     </swiper>
     <view class="home-page-nav">
-      <view v-for="item in navCard" :key="item.value" @click="toView(item.value)">
+      <view v-for="item in navCard" :key="item.value" @click="toView(item)">
         <view class="home-page-nav__image">
           <image :src="item.image"></image>
         </view>
