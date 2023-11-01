@@ -64,4 +64,27 @@ router.post('/api/signUser', async (ctx) => {
   await login(ctx, params.username, params.password)
 })
 
+
+router.get('/web/allUser', jwtMiddleware, async (ctx) => {
+  const selectAllUser = 'SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user LIMIT ? OFFSET ?';
+  const selectAllUserCount = 'SELECT COUNT(*) AS total FROM jdz_user;';
+  const curUser = ctx.state.user || {}
+  const params = ctx.request.query
+  const rows = await excuteSql(selectAllUser, [+params.limit, +params.offset])
+  const rowCount = await excuteSql(selectAllUserCount)
+  if(rows.fail){
+    ctx.body = { code: -1, message: '查询失败' };
+  }else{
+    ctx.body = { code: 200, data: {
+      list: rows.map(item=>{
+        item.createTime = new Date(item.createTime).toLocaleString().replace(/\//g, '-')
+        item.updateTime = new Date(item.updateTime).toLocaleString().replace(/\//g, '-')
+        item.likes = item.likes?item.likes.join(','):''
+        return item
+      }),
+      total: rowCount[0].total
+    }, message: '查询成功' };
+  }
+})
+
 module.exports = router

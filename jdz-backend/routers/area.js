@@ -62,9 +62,9 @@ router.get('/api/getAreaComment', async (ctx) => {
   const query = ctx.request.query
   let list = []
   if(query.areakey){
-    list = await excuteSql('getAreaCommentByArea', [query.areakey])
-  }else{
-    list = await excuteSql('getAreaCommentByUser', [query.userid])
+    list = await excuteSql('getComment', [query.areakey], ' WHERE c.area_key = ?')
+  }else if(query.userid){
+    list = await excuteSql('getComment', [query.userid], ' WHERE c.userid = ?')
   }
   list.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
   list.map(item=>{
@@ -74,6 +74,44 @@ router.get('/api/getAreaComment', async (ctx) => {
     return item
   })
   ctx.body = { code: 200, data: list, message: '获取评论成功' };
+})
+
+router.get('/web/getComment', jwtMiddleware, async (ctx) => {
+  const creater = ctx.state.user
+  const query = ctx.request.query
+  if(creater.rid != 1){
+    ctx.body = { code: 401, message: '没有权限' };
+  }
+  let extSql = [], values = []
+  if(query.id){
+    extSql.push(`c.id = ?`)
+    values.push(query.id)
+  }
+  if(query.isVerify != undefined && query.isVerify != ''){
+    extSql.push(`c.is_verify = ?`)
+    values.push(query.isVerify)
+  }
+  let list = await excuteSql('getComment', values, extSql.length? (' WHERE ' + extSql.join(' AND ')):'')
+  list.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+  list.map(item=>{
+    if(item.id>39){
+      item.images = item.images.map(img=>'wechat/'+img)
+    }
+    return item
+  })
+  ctx.body = { code: 200, data: list, message: '获取评论成功' };
+})
+
+router.get('/web/verifyComment', jwtMiddleware, async (ctx) => {
+  const creater = ctx.state.user
+  console.log(creater, creater.rid != 1)
+  if(creater.rid != 1){
+    ctx.body = { code: 401, message: '没有权限' };
+  }else{
+    const query = ctx.request.query
+    let res = await excuteSql('upComment', [query.isVerify, query.id])
+    ctx.body = { code: 200, message: res.message || '审核成功' };
+  }
 })
 
 

@@ -1,0 +1,24 @@
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html.dark {
+  background: #121212;
+}
+
+:root{
+  /* --el-menu-hover-bg-color: #fbfbfb;
+  --el-menu-active-bg-color: #f1f1f1;
+  --el-menu-active-color: #303133; */
+  --el-menu-bg-color: transparent;
+}
+/* .el-menu-item{
+  margin-bottom: 6px;
+}
+.el-menu-item.is-active{
+  background-image: linear-gradient(90deg,#F4F4F4 0%,#EFEFEF 100%);
+} */

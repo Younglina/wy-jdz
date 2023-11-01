@@ -13,13 +13,13 @@ const jwtMiddleware = async (ctx, next) => {
     } catch (error) {
       // JWT 验证失败
       ctx.status = 401;
-      ctx.body = { error: 'Invalid token' };
+      ctx.body = { code: '-1', message: '未登录' };
       return;
     }
   } else {
     // Cookie 中没有 JWT
     ctx.status = 401;
-    ctx.body = { error: 'Missing token' };
+    ctx.body = { code: '-1', message: '未登录' };
     return;
   }
 

@@ -7,8 +7,9 @@ const props = defineProps({
   type: { default: 'detail' },
   titleKey: { default: 'nickname' },
 })
-console.log(props.datalist, 'asdf')
+console.log( props.datalist,  'asdf')
 const store = useStore()
+
 const verify = ref(false)
 // watch(()=>store.userInfo,async ()=>{
 //   if(store.userInfo){

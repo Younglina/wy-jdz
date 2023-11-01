@@ -11,6 +11,7 @@ const app = new Koa();
 // 添加路由模块
 app.use(async (ctx, next) => {
   ctx.set('Access-Control-Allow-Credentials', 'true'); // 允许发送 Cookie
+  ctx.set('Access-Control-Allow-Origin', '*'); // 允许发送 Cookie
   ctx.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); // 允许的请求方法
   await next();
 });
