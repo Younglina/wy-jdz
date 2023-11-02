@@ -4,6 +4,7 @@ export const useStore = defineStore('mainStore', {
   state: () => ({
       userInfo: null,
       isCollapse: false,
+      currentEditArea: null
   }),
   getters: {
     getUserInfo(state){

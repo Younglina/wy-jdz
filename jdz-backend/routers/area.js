@@ -13,13 +13,23 @@ router.post('/api/addArea', jwtMiddleware, async (ctx) => {
   if(creater.rid != 1){
     ctx.body = { code: 401, message: '没有权限' };
   }
-  const keys = `address, area_type, cost, created_at, data_type, description, introduction, area_key, latitude, likes, longitude, location, name, open_time, phone, tags, images, updated_at`
+  const params = ctx.request.body
+  if(params.newImages.length){
+    const res = await uploadFiles(params.newImages)
+    params.images.push(...res.filter(item=>item.success).map(item=>item.filename))
+    console.log(res, 'asdfasdf')
+  }
+  const keys = `address, area_type, cost, data_type, description, introduction, areakey, latitude, longitude, location, name, open_time, phone, tags, images, created_at, updated_at`;
   const addArea = `INSERT INTO jdz_area (${keys}) VALUES (${keys.split(',').map(_=>`?`).join(', ')})`;
   const values = []
-  const params = ctx.request.body
   keys.split(', ').forEach(key => {
     if(key==='tags'){
       values.push(JSON.stringify(params[key] || ''))
+    }else if(key==='createdAt' || key==='updatedAt'){
+      values.push(new Date().toISOString())
+    }else if (key==='images'){
+      console.log(params[key])
+      values.push(JSON.stringify(params.images))
     }else{
       values.push(params[snakeToCamel(key)] || '')
     }
@@ -29,7 +39,7 @@ router.post('/api/addArea', jwtMiddleware, async (ctx) => {
 })
 
 router.get('/api/getArea', async (ctx) => {
-  let addArea = `SELECT id, address, area_type as areaType, cost, created_at as createdAt, data_type as dataType, description, introduction, area_key as areakey, latitude, likes, longitude, location, name, open_time as openTime, phone, tags, images, updated_at as updatedAt
+  let addArea = `SELECT id, address, area_type as areaType, cost, created_at as createdAt, data_type as dataType, description, introduction, areakey, latitude, likes, longitude, location, name, open_time as openTime, phone, tags, images, updated_at as updatedAt
   FROM jdz_area
   `;
   const query = ctx.request.query
@@ -62,7 +72,7 @@ router.get('/api/getAreaComment', async (ctx) => {
   const query = ctx.request.query
   let list = []
   if(query.areakey){
-    list = await excuteSql('getComment', [query.areakey], ' WHERE c.area_key = ?')
+    list = await excuteSql('getComment', [query.areakey], ' WHERE c.areakey = ?')
   }else if(query.userid){
     list = await excuteSql('getComment', [query.userid], ' WHERE c.userid = ?')
   }
@@ -97,6 +107,7 @@ router.get('/web/getComment', jwtMiddleware, async (ctx) => {
     if(item.id>39){
       item.images = item.images.map(img=>'wechat/'+img)
     }
+    item.createdAt = item.createdAt.slice(0, 19)
     return item
   })
   ctx.body = { code: 200, data: list, message: '获取评论成功' };

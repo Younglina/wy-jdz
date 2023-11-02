@@ -10,6 +10,7 @@
     "up": "taze major -I"
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@vueuse/core": "^10.4.1",
     "axios": "^1.6.0",
     "element-plus": "^2.4.1",

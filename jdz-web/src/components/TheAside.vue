@@ -2,6 +2,9 @@
 import { useStore } from '@/store'
 import { routes } from '@/router'
 const store = useStore()
+const menus = computed(() => {
+  return routes.filter(item=>item.meta.icon)
+})
 </script>
 <template>
   <el-aside :style="{ width: store.isCollapse ? '64px' : '200px' }" class="animate-aside">
@@ -9,8 +12,8 @@ const store = useStore()
       <img src="@/assets/jdz.svg" h-16px w-16px mr-1>
       <span style="font-family: fantasy;">Younglina</span>
     </div>
-    <el-menu :collapse="store.isCollapse" class="aside-menu" border-r-unset :collapse-transition="false" router>
-      <el-menu-item v-for="item in routes" :key="item.name" :index="item.path">
+    <el-menu :collapse="store.isCollapse" class="aside-menu" border-r-unset :collapse-transition="false" router default-active="/">
+      <el-menu-item v-for="item in menus" :key="item.name" :index="item.path">
         <el-icon>
         <div :class="[item.meta.icon]"></div>
       </el-icon>

@@ -21,7 +21,10 @@ onMounted(() => {
 function getTableData() {
   http.get('/web/getComment', queryForm.value).then(res => {
     console.log(res)
-    tableInfo.value.data = res.data
+    tableInfo.value.data = res.data.map(item=>{
+      item.images = item.images.map(img=> 'https://younglina-1256042946.cos.ap-nanjing.myqcloud.com/' + img)
+      return item
+    })
   }).catch(e => {
     console.log(e)
   })
@@ -33,13 +36,14 @@ const handleCurrentChange = (val) => {
 const handleVerify = (id, isVerify) => {
   http.get('/web/verifyComment', {id, isVerify}).then(res => {
     console.log(res)
+    ElMessage.success('操作成功')
   }).catch(e => {
-    console.log(e)
+    ElMessage.error(e.messge || '操作失败')
   })
 }
 </script>
 <template>
-  <el-form :inline="true" :model="queryForm" class="demo-form-inline">
+  <el-form :inline="true" :model="queryForm">
     <el-form-item label="id">
       <el-input v-model="queryForm.id" placeholder="id" clearable />
     </el-form-item>
@@ -56,10 +60,12 @@ const handleVerify = (id, isVerify) => {
   <TheTable :tableInfo="tableInfo">
     <el-table-column label="图片">
       <template #default="scope">
-        <el-image v-for="url in scope.row.images" class="verify-list_img"
+        <el-image v-for="url in scope.row.images" class="table-img"
           fill="contain"
-          :key="'https://younglina-1256042946.cos.ap-nanjing.myqcloud.com/' + url"
-          :src="'https://younglina-1256042946.cos.ap-nanjing.myqcloud.com/' + url" lazy />
+          :preview-src-list="scope.row.images"
+          preview-teleported
+          :key="url"
+          :src="url" lazy />
       </template>
     </el-table-column>
     <el-table-column label="操作">
@@ -73,9 +79,4 @@ const handleVerify = (id, isVerify) => {
 <style scoped lang='scss'>
 .verify-list {
   flex-wrap: nowrap;
-
-  &_img {
-    width: 80px;
-    height: 80px;
-  }
 }</style>

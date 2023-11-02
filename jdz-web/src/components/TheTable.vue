@@ -2,7 +2,7 @@
 
 </script>
 <template>
-  <el-table :data="$attrs.tableInfo.data" style="width: 100%">
+  <el-table :data="$attrs.tableInfo.data" style="width: 100%" show-overflow-tooltip>
     <el-table-column v-for="item in $attrs.tableInfo.columns" :prop="item.prop" :label="item.label" :key="item.prop"
       :width="item.width || ''" />
     <slot></slot>
