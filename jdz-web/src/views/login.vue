@@ -1,5 +1,7 @@
 <script setup>
 import http from '@/utils/http'
+import { useStore } from '@/store'
+const store = useStore()
 defineOptions({
   name: 'IndexPage',
 })
@@ -12,6 +14,7 @@ function go() {
   if (username.value)
     http.post('/api/login', { username: username.value, password: password.value }).then((res) => {
       console.log(res)
+      store.userInfo = res.data.userInfo
     })
 }
 </script>

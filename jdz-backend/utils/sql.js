@@ -1,5 +1,13 @@
 const getConnection = require('./mysql')
-
+const log4js = require('log4js')
+log4js.configure({
+  appenders: {
+    sqlLog: { type: 'file', filename: 'sql.log' }
+  },
+  categories: {
+    default: { appenders: ['sqlLog'], level: 'info' }
+  }
+});
 const Sqls = {
   getUserByNamePwd: 'SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user WHERE username = ? and password = ?',
   getMenusByRole: `SELECT menus.* FROM roles
@@ -18,8 +26,11 @@ const Sqls = {
 
 const excuteSql = async (fn, values, extSql) => {
   try{
+    const logger = log4js.getLogger();
     const conn = await getConnection()
     const query = Sqls[fn] || fn
+    logger.info('执行sql：' + query)
+    logger.info('参数：' + values)
     const [rows] = await conn.query(query+(extSql||''), values)
     conn.release();
     return rows

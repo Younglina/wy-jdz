@@ -1,0 +1,106 @@
+[2023-11-03T09:40:40.529] [INFO] default - 执行sql：SELECT id, address, area_type as areaType, cost, created_at as createdAt, data_type as dataType, description, introduction, areakey, latitude, likes, longitude, location, name, open_time as openTime, phone, tags, images, updated_at as updatedAt
+  FROM jdz_area
+  
+[2023-11-03T09:40:40.531] [INFO] default - 参数：
+[2023-11-03T09:40:55.118] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user LIMIT ? OFFSET ?
+[2023-11-03T09:40:55.119] [INFO] default - 参数：10,0
+[2023-11-03T09:40:55.140] [INFO] default - 执行sql：SELECT COUNT(*) AS total FROM jdz_user;
+[2023-11-03T09:40:55.140] [INFO] default - 参数：undefined
+[2023-11-03T09:41:43.102] [INFO] default - 执行sql：SELECT id, address, area_type as areaType, cost, created_at as createdAt, data_type as dataType, description, introduction, areakey, latitude, likes, longitude, location, name, open_time as openTime, phone, tags, images, updated_at as updatedAt
+  FROM jdz_area
+  
+[2023-11-03T09:41:43.104] [INFO] default - 参数：
+[2023-11-03T09:41:45.595] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user LIMIT ? OFFSET ?
+[2023-11-03T09:41:45.595] [INFO] default - 参数：10,0
+[2023-11-03T09:41:45.600] [INFO] default - 执行sql：SELECT COUNT(*) AS total FROM jdz_user;
+[2023-11-03T09:41:45.600] [INFO] default - 参数：undefined
+[2023-11-03T09:44:08.251] [INFO] default - 执行sql：SELECT id, address, area_type as areaType, cost, created_at as createdAt, data_type as dataType, description, introduction, areakey, latitude, likes, longitude, location, name, open_time as openTime, phone, tags, images, updated_at as updatedAt
+  FROM jdz_area
+  
+[2023-11-03T09:44:08.252] [INFO] default - 参数：
+[2023-11-03T09:45:26.957] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user LIMIT ? OFFSET ?
+[2023-11-03T09:45:26.959] [INFO] default - 参数：10,0
+[2023-11-03T09:45:26.977] [INFO] default - 执行sql：SELECT COUNT(*) AS total FROM jdz_user;
+[2023-11-03T09:45:26.977] [INFO] default - 参数：undefined
+[2023-11-03T09:48:32.067] [INFO] default - 执行sql：SELECT id, address, area_type as areaType, cost, created_at as createdAt, data_type as dataType, description, introduction, areakey, latitude, likes, longitude, location, name, open_time as openTime, phone, tags, images, updated_at as updatedAt
+  FROM jdz_area
+  
+[2023-11-03T09:48:32.071] [INFO] default - 参数：
+[2023-11-03T09:48:44.681] [INFO] default - 执行sql：UPDATE jdz_area SET address = ?,area_type = ?,cost = ?,data_type = ?,description = ?,introduction = ?,areakey = ?,latitude = ?,longitude = ?,location = ?,name = ?,open_time = ?,phone = ?,tags = ?,images = ?,created_at = ?,updated_at = ? WHERE id = ?
+[2023-11-03T09:48:44.681] [INFO] default - 参数：江西省景德镇市昌江区昌江开发区紫晶路北湖对面,博物馆,,scenic,千年瓷都的历史辉煌,景德镇中国陶瓷博物馆位于景德镇市昌江区紫晶北路1号，是国内第一家大型陶瓷专题博物馆，国家一级博物馆、全国节约型公共机构示范单位、全国科普教育基地、全国爱国主义教育示范基地、全国中小学生研学实践教育基地、海峡两岸交流基地。总占地面积5.9万多平方米，建筑面积3.2万平方米，由常设展厅、临时展厅、学术交流区、公共活动空间、休闲商务区、办公区、多功能区、库房区等组成，可满足收藏、展示、研究、培训和教育等各项功能需求。博物馆藏文物藏品自新石器时代陶器和汉唐以来各个不同历史时期的陶瓷名品佳作五万余件，其中国家珍贵文物1600余件，涵括了景德镇千年制瓷历史长河中的代表品种。特别是王步、珠山八友等近现代艺术陶瓷精品，该馆更是品类丰富、学术价值和艺术价值极高，为陶瓷历史文化研究提供了最可靠的实物依据。,tcbwgwy1698974760937wy1698976124625,29.29324,117.17553,昌江区qweqwe,景德镇中国陶瓷博物馆,09:00-17:00（最晚入园16:30）,0798-8253701,["昌江区、博物馆"],["tcbwg_1.jpg","tcbwg_1677577782265_动态规划刷题.jpeg"],2023-02-25T15:10:14.778Z,2023-02-25T15:10:14.778Z,23
+[2023-11-03T09:50:14.419] [INFO] default - 执行sql：UPDATE jdz_area SET address = ?,area_type = ?,cost = ?,data_type = ?,description = ?,introduction = ?,areakey = ?,latitude = ?,longitude = ?,location = ?,name = ?,open_time = ?,phone = ?,tags = ?,images = ?,created_at = ?,updated_at = ? WHERE id = ?
+[2023-11-03T09:50:14.420] [INFO] default - 参数：江西省景德镇市昌江区昌江开发区紫晶路北湖对面,博物馆,,scenic,千年瓷都的历史辉煌,景德镇中国陶瓷博物馆位于景德镇市昌江区紫晶北路1号，是国内第一家大型陶瓷专题博物馆，国家一级博物馆、全国节约型公共机构示范单位、全国科普教育基地、全国爱国主义教育示范基地、全国中小学生研学实践教育基地、海峡两岸交流基地。总占地面积5.9万多平方米，建筑面积3.2万平方米，由常设展厅、临时展厅、学术交流区、公共活动空间、休闲商务区、办公区、多功能区、库房区等组成，可满足收藏、展示、研究、培训和教育等各项功能需求。博物馆藏文物藏品自新石器时代陶器和汉唐以来各个不同历史时期的陶瓷名品佳作五万余件，其中国家珍贵文物1600余件，涵括了景德镇千年制瓷历史长河中的代表品种。特别是王步、珠山八友等近现代艺术陶瓷精品，该馆更是品类丰富、学术价值和艺术价值极高，为陶瓷历史文化研究提供了最可靠的实物依据。,tcbwgwy1698974760937wy1698976214301,29.29324,117.17553,昌江区,景德镇中国陶瓷博物馆,09:00-17:00（最晚入园16:30）,0798-8253701,["昌江区、博物馆"],["tcbwg_1.jpg","tcbwg_1677577782265_动态规划刷题.jpeg"],2023-02-25T15:10:14.778Z,2023-11-03T01:50:14.360Z,23
+[2023-11-03T10:12:10.771] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user LIMIT ? OFFSET ?
+[2023-11-03T10:12:10.771] [INFO] default - 参数：10,0
+[2023-11-03T10:12:10.778] [INFO] default - 执行sql：SELECT COUNT(*) AS total FROM jdz_user;
+[2023-11-03T10:12:10.778] [INFO] default - 参数：undefined
+[2023-11-03T10:17:52.126] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user LIMIT ? OFFSET ?
+[2023-11-03T10:17:52.126] [INFO] default - 参数：10,0
+[2023-11-03T10:17:52.129] [INFO] default - 执行sql：SELECT COUNT(*) AS total FROM jdz_user;
+[2023-11-03T10:17:52.129] [INFO] default - 参数：undefined
+[2023-11-03T10:49:10.438] [INFO] default - 执行sql：SELECT id, address, area_type as areaType, cost, created_at as createdAt, data_type as dataType, description, introduction, areakey, latitude, likes, longitude, location, name, open_time as openTime, phone, tags, images, updated_at as updatedAt
+  FROM jdz_area
+  
+[2023-11-03T10:49:10.438] [INFO] default - 参数：
+[2023-11-03T10:49:14.085] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user LIMIT ? OFFSET ?
+[2023-11-03T10:49:14.085] [INFO] default - 参数：10,0
+[2023-11-03T10:49:14.086] [INFO] default - 执行sql：SELECT COUNT(*) AS total FROM jdz_user;
+[2023-11-03T10:49:14.086] [INFO] default - 参数：undefined
+[2023-11-03T10:53:48.908] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user LIMIT ? OFFSET ?
+[2023-11-03T10:53:48.908] [INFO] default - 参数：10,0
+[2023-11-03T10:53:48.909] [INFO] default - 执行sql：SELECT COUNT(*) AS total FROM jdz_user;
+[2023-11-03T10:53:48.909] [INFO] default - 参数：undefined
+[2023-11-03T10:53:52.620] [INFO] default - 执行sql：SELECT id, address, area_type as areaType, cost, created_at as createdAt, data_type as dataType, description, introduction, areakey, latitude, likes, longitude, location, name, open_time as openTime, phone, tags, images, updated_at as updatedAt
+  FROM jdz_area
+  
+[2023-11-03T10:53:52.620] [INFO] default - 参数：
+[2023-11-03T10:53:55.904] [INFO] default - 执行sql：SELECT c.areakey as areakey, content, c.created_at as createdAt, c.images, userid, c.id, u.username as nickname, a.name as areaName, is_verify as isVerify
+  FROM jdz.jdz_comment c
+  LEFT JOIN jdz.jdz_user u ON u.id = c.userid
+  LEFT JOIN jdz.jdz_area a ON a.areakey = c.areakey
+[2023-11-03T10:53:55.905] [INFO] default - 参数：
+[2023-11-03T10:55:20.320] [INFO] default - 执行sql：SELECT id, address, area_type as areaType, cost, created_at as createdAt, data_type as dataType, description, introduction, areakey, latitude, likes, longitude, location, name, open_time as openTime, phone, tags, images, updated_at as updatedAt
+  FROM jdz_area
+  
+[2023-11-03T10:55:20.320] [INFO] default - 参数：
+[2023-11-03T10:57:01.604] [INFO] default - 执行sql：SELECT c.areakey as areakey, content, c.created_at as createdAt, c.images, userid, c.id, u.username as nickname, a.name as areaName, is_verify as isVerify
+  FROM jdz.jdz_comment c
+  LEFT JOIN jdz.jdz_user u ON u.id = c.userid
+  LEFT JOIN jdz.jdz_area a ON a.areakey = c.areakey
+[2023-11-03T10:57:01.604] [INFO] default - 参数：
+[2023-11-03T10:58:28.942] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user LIMIT ? OFFSET ?
+[2023-11-03T10:58:28.943] [INFO] default - 参数：10,0
+[2023-11-03T10:58:28.944] [INFO] default - 执行sql：SELECT COUNT(*) AS total FROM jdz_user;
+[2023-11-03T10:58:28.944] [INFO] default - 参数：undefined
+[2023-11-03T11:03:08.424] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user WHERE username = ? and password = ?
+[2023-11-03T11:03:08.424] [INFO] default - 参数：wzq1,wzq1
+[2023-11-03T11:03:08.428] [INFO] default - 执行sql：SELECT menus.* FROM roles
+  JOIN menus ON FIND_IN_SET(menus.id, roles.menus_id)
+  WHERE roles.id = ?
+[2023-11-03T11:03:08.428] [INFO] default - 参数：1
+[2023-11-03T11:03:08.460] [INFO] default - 执行sql：UPDATE jdz_user SET login_status=? WHERE id = ?
+[2023-11-03T11:03:08.460] [INFO] default - 参数：1,908
+[2023-11-03T11:06:27.774] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user WHERE username = ? and password = ?
+[2023-11-03T11:06:27.774] [INFO] default - 参数：wzq1,wzq1
+[2023-11-03T11:06:27.775] [INFO] default - 执行sql：SELECT menus.* FROM roles
+  JOIN menus ON FIND_IN_SET(menus.id, roles.menus_id)
+  WHERE roles.id = ?
+[2023-11-03T11:06:27.775] [INFO] default - 参数：1
+[2023-11-03T11:06:27.777] [INFO] default - 执行sql：UPDATE jdz_user SET login_status=? WHERE id = ?
+[2023-11-03T11:06:27.777] [INFO] default - 参数：1,908
+[2023-11-03T11:07:26.554] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user WHERE username = ? and password = ?
+[2023-11-03T11:07:26.554] [INFO] default - 参数：wzq1,wzq1
+[2023-11-03T11:07:26.555] [INFO] default - 执行sql：SELECT menus.* FROM roles
+  JOIN menus ON FIND_IN_SET(menus.id, roles.menus_id)
+  WHERE roles.id = ?
+[2023-11-03T11:07:26.555] [INFO] default - 参数：1
+[2023-11-03T11:07:26.558] [INFO] default - 执行sql：UPDATE jdz_user SET login_status=? WHERE id = ?
+[2023-11-03T11:07:26.558] [INFO] default - 参数：1,908
+[2023-11-03T11:08:03.376] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user WHERE username = ? and password = ?
+[2023-11-03T11:08:03.376] [INFO] default - 参数：wzq1,wzq1
+[2023-11-03T11:08:03.377] [INFO] default - 执行sql：SELECT menus.* FROM roles
+  JOIN menus ON FIND_IN_SET(menus.id, roles.menus_id)
+  WHERE roles.id = ?
+[2023-11-03T11:08:03.377] [INFO] default - 参数：1
+[2023-11-03T11:08:03.379] [INFO] default - 执行sql：UPDATE jdz_user SET login_status=? WHERE id = ?
+[2023-11-03T11:08:03.379] [INFO] default - 参数：1,908

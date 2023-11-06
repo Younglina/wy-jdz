@@ -20,22 +20,43 @@ router.post('/api/addArea', jwtMiddleware, async (ctx) => {
     console.log(res, 'asdfasdf')
   }
   const keys = `address, area_type, cost, data_type, description, introduction, areakey, latitude, longitude, location, name, open_time, phone, tags, images, created_at, updated_at`;
-  const addArea = `INSERT INTO jdz_area (${keys}) VALUES (${keys.split(',').map(_=>`?`).join(', ')})`;
-  const values = []
-  keys.split(', ').forEach(key => {
-    if(key==='tags'){
-      values.push(JSON.stringify(params[key] || ''))
-    }else if(key==='createdAt' || key==='updatedAt'){
-      values.push(new Date().toISOString())
-    }else if (key==='images'){
-      console.log(params[key])
-      values.push(JSON.stringify(params.images))
-    }else{
-      values.push(params[snakeToCamel(key)] || '')
-    }
-  })
-  await excuteSql(addArea, values)
-  ctx.body = { code: 200, message: '新增成功' };
+  if(params.id){
+    let updateArea = `UPDATE jdz_area SET `;
+    const values = [], sqks = []
+    keys.split(', ').forEach(key => {
+      sqks.push(`${key} = ?`)
+      if(key==='tags'){
+        values.push(JSON.stringify(params[key] || ''))
+      }else if(key==='updated_at'){
+        values.push(new Date().toISOString())
+      }else if (key==='images'){
+        values.push(JSON.stringify(params.images))
+      }else{
+        values.push(params[snakeToCamel(key)] || '')
+      }
+    })
+    values.push(params.id)
+    updateArea += sqks.join(',') + ` WHERE id = ?`
+    await excuteSql(updateArea, values)
+    ctx.body = { code: 200, message: '更新成功' };
+  }else{
+    const addArea = `INSERT INTO jdz_area (${keys}) VALUES (${keys.split(',').map(_=>`?`).join(', ')})`;
+    const values = []
+    keys.split(', ').forEach(key => {
+      if(key==='tags'){
+        values.push(JSON.stringify(params[key] || ''))
+      }else if(key==='created_at' || key==='updated_at'){
+        values.push(new Date().toISOString())
+      }else if (key==='images'){
+        console.log(params[key])
+        values.push(JSON.stringify(params.images))
+      }else{
+        values.push(params[snakeToCamel(key)] || '')
+      }
+    })
+    await excuteSql(addArea, values)
+    ctx.body = { code: 200, message: '新增成功' };
+  }
 })
 
 router.get('/api/getArea', async (ctx) => {
