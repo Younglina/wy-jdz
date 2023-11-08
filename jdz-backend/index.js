@@ -5,6 +5,7 @@ const routerRouter = require('./routers/router');
 const userRouter = require('./routers/user');
 const areaRouter = require('./routers/area');
 const mockRouter = require('./routers/mock');
+const static = require('koa-static');
 const { handleException } = require('./utils/handleError');
 const app = new Koa();
 
@@ -29,6 +30,9 @@ app.use(areaRouter.routes())
 app.use(areaRouter.allowedMethods());
 app.use(mockRouter.routes())
 app.use(mockRouter.allowedMethods());
+
+// 设置静态文件目录
+app.use(static('../jdz-web/dist'));
 app.use(handleException);
 
 app.listen(3001, () => {
