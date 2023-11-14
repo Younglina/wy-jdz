@@ -15,7 +15,7 @@ async function login(ctx, username, password){
     // const menus = await getMenusByRoleid(ctx, cus.rid)
     excuteSql('upLoginStatus', [1, cus.id])
     const token = jwt.sign({ id: cus.id, rid: cus.rid, username: cus.username}, 'wy-jdz-token')
-    ctx.cookies.set('token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 })
+    ctx.cookies.set('token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30, sameSite: 'none', secure: true })
     ctx.body = { code: 200, data: { userInfo: cus}, message: '登录成功' };
   }
 }
@@ -50,7 +50,7 @@ router.get('/api/logout', jwtMiddleware, async (ctx) => {
   const user = ctx.state.user
   await excuteSql('upLoginStatus', [0, user.id])
   const token = jwt.sign({}, 'wy-jdz-token')
-  ctx.cookies.set('token', token, { httpOnly: true, maxAge: 0 })
+  ctx.cookies.set('token', token, { httpOnly: true, maxAge: 0, sameSite: 'none', secure: true })
   ctx.body = { code: 200, message: '退出成功' };
 });
 
