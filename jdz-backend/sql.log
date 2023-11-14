@@ -104,3 +104,31 @@
 [2023-11-03T11:08:03.377] [INFO] default - 参数：1
 [2023-11-03T11:08:03.379] [INFO] default - 执行sql：UPDATE jdz_user SET login_status=? WHERE id = ?
 [2023-11-03T11:08:03.379] [INFO] default - 参数：1,908
+[2023-11-14T14:50:38.047] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user WHERE username = ? and password = ?
+[2023-11-14T14:50:38.048] [INFO] default - 参数：,
+[2023-11-14T14:50:51.397] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user WHERE username = ? and password = ?
+[2023-11-14T14:50:51.397] [INFO] default - 参数：wzq_test,wzq_test
+[2023-11-14T14:50:51.404] [INFO] default - 执行sql：SELECT menus.* FROM roles
+  JOIN menus ON FIND_IN_SET(menus.id, roles.menus_id)
+  WHERE roles.id = ?
+[2023-11-14T14:50:51.404] [INFO] default - 参数：4
+[2023-11-14T14:50:51.421] [INFO] default - 执行sql：UPDATE jdz_user SET login_status=? WHERE id = ?
+[2023-11-14T14:50:51.421] [INFO] default - 参数：1,834
+[2023-11-14T15:14:37.520] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user WHERE username = ? and password = ?
+[2023-11-14T15:14:37.521] [INFO] default - 参数：wzq1,wzq1
+[2023-11-14T15:14:37.529] [INFO] default - 执行sql：SELECT menus.* FROM roles
+  JOIN menus ON FIND_IN_SET(menus.id, roles.menus_id)
+  WHERE roles.id = ?
+[2023-11-14T15:14:37.529] [INFO] default - 参数：1
+[2023-11-14T15:14:37.536] [INFO] default - 执行sql：UPDATE jdz_user SET login_status=? WHERE id = ?
+[2023-11-14T15:14:37.537] [INFO] default - 参数：1,908
+[2023-11-14T15:20:07.359] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user WHERE username = ? and password = ?
+[2023-11-14T15:20:07.361] [INFO] default - 参数：,
+[2023-11-14T15:20:39.189] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user WHERE username = ? and password = ?
+[2023-11-14T15:20:39.190] [INFO] default - 参数：,
+[2023-11-14T15:21:23.919] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user WHERE username = ? and password = ?
+[2023-11-14T15:21:23.922] [INFO] default - 参数：,
+[2023-11-14T16:25:03.767] [INFO] default - 执行sql：SELECT username, id, rid, likes, login_status as loginStatus, create_time as createTime, update_time as updateTime FROM jdz.jdz_user WHERE username = ? and password = ?
+[2023-11-14T16:25:03.768] [INFO] default - 参数：wzq1,wzq1
+[2023-11-14T16:25:03.779] [INFO] default - 执行sql：UPDATE jdz_user SET login_status=? WHERE id = ?
+[2023-11-14T16:25:03.780] [INFO] default - 参数：1,908

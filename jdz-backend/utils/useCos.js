@@ -10,7 +10,7 @@ const BUCKET_CONFIG = {
   Region: 'ap-nanjing',
 }
 
-const uploadImage = async (info) => {
+const uploadImage = async (info, dir='wechat') => {
   const myCos = new COS({
     ...COS_CONFIG,
     SimpleUploadMethod: 'putObject',
@@ -20,7 +20,7 @@ const uploadImage = async (info) => {
     info.map(item => {
       myCos.putObject({
         ...BUCKET_CONFIG,
-        Key: `/wechat/${item.filename}`,
+        Key: `/${dir}/${item.filename}`,
         StorageClass: "STANDARD",
         Body: Buffer.from(item.file, 'base64'), // 上传文件对象
         onProgress: function (info) {
@@ -50,6 +50,7 @@ const uploadImage = async (info) => {
           res.push({
             success: true,
             message: item.filename+'上传成功',
+            url: 'https://'+data.Location,
             filename: item.filename
           })
         }

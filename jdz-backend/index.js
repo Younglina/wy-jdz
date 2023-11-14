@@ -12,12 +12,20 @@ const app = new Koa();
 // 添加路由模块
 app.use(async (ctx, next) => {
   ctx.set('Access-Control-Allow-Credentials', 'true'); // 允许发送 Cookie
-  ctx.set('Access-Control-Allow-Origin', '*'); // 允许发送 Cookie
+  ctx.set('Access-Control-Allow-Origin', ctx.request.header.origin); // 允许发送 Cookie
   ctx.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); // 允许的请求方法
-  await next();
+  ctx.set('Access-Control-Allow-Headers', 'Content-Type');
+  ctx.set('Content-Type', 'application/json;charset=utf-8');
+    // 对于预检请求（OPTIONS请求），直接返回200状态码
+  if (ctx.method === 'OPTIONS') {
+    ctx.status=204;
+    ctx.body=""
+  } else {
+    await next();
+  }
 });
 // 添加跨域中间件
-app.use(cors());
+// app.use(cors());
 
 // 添加错误处理中间件
 app.use(bodyParser());
