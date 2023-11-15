@@ -45,7 +45,7 @@ router.post('/web/blog', jwtMiddleware, async (ctx) => {
     let markdown = `---
 title: ${params.text}
 author: Younglina
-date:  ${dates}
+date: '${dates}'
 categories:
 - 文档
 tags:
