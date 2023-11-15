@@ -80,17 +80,17 @@ ${params.content}
         })
       });
 
-      // const buildPath = path.resolve(__dirname, '../../../Woung');
-      // const command = `cd ${buildPath} && npm run build`;
+      const buildPath = path.resolve(__dirname, '../../../Woung');
+      const command = `cd ${buildPath} && npm run build`;
 
-      // exec(command, (error, stdout, stderr) => {
-      //   if (error) {
-      //     console.error('Error executing command:', error);
-      //     return;
-      //   }
+      exec(command, (error, stdout, stderr) => {
+        if (error) {
+          console.error('Error executing command:', error);
+          return;
+        }
 
-      //   console.log('Command executed successfully:', stdout);
-      // });
+        console.log('Command executed successfully:', stdout);
+      });
     })
       ctx.body = {
         "code": 200,
