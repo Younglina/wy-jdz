@@ -1,10 +1,9 @@
 const Koa = require('koa');
-const cors = require('koa-cors');
 const bodyParser = require('koa-bodyparser');
 const routerRouter = require('./routers/router');
 const userRouter = require('./routers/user');
 const areaRouter = require('./routers/area');
-const mockRouter = require('./routers/mock');
+const webRouter = require('./routers/web');
 const static = require('koa-static');
 const { handleException } = require('./utils/handleError');
 const app = new Koa();
@@ -24,8 +23,6 @@ app.use(async (ctx, next) => {
     await next();
   }
 });
-// 添加跨域中间件
-// app.use(cors());
 
 // 添加错误处理中间件
 app.use(bodyParser());
@@ -36,8 +33,8 @@ app.use(userRouter.routes())
 app.use(userRouter.allowedMethods());
 app.use(areaRouter.routes())
 app.use(areaRouter.allowedMethods());
-app.use(mockRouter.routes())
-app.use(mockRouter.allowedMethods());
+app.use(webRouter.routes())
+app.use(webRouter.allowedMethods());
 
 // 设置静态文件目录
 app.use(static('../jdz-web/dist'));

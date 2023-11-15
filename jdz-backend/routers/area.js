@@ -4,30 +4,9 @@ const excuteSql = require('../utils/sql')
 const uploadFiles = require('../utils/useCos')
 const jwtMiddleware = require('../middleware/jwt');
 
-const multer = require('@koa/multer')
-const upload = multer();
-
 function snakeToCamel(str) {
   return str.replace(/_([a-z])/g, (match, letter) => letter.toUpperCase());
 }
-
-router.post('/api/upload', jwtMiddleware, upload.single('file'), async (ctx) => {
-  const creater = ctx.state.user
-  if (creater.rid != 1) {
-    ctx.body = { code: 401, message: '没有权限' };
-  }
-  const params = ctx.request.body
-  if (params.filename) {
-    const res = await uploadFiles([{ file: ctx.file.buffer, filename: params.filename }], 'blog')
-    console.log(res, 'asdfasdf')
-    ctx.body = {
-      "code": 200,
-      "data": res.map(item => {
-        return { url: item.url, filename: item.filename }
-      })
-    }
-  }
-})
 
 router.post('/api/addArea', jwtMiddleware, async (ctx) => {
   const creater = ctx.state.user
