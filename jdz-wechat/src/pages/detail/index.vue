@@ -20,7 +20,8 @@ onLoad(async (options) => {
     isLike.value = true
   }
   const areaCommnet = await request.get('/getAreaComment', { areakey: options.areakey })
-  const mockComment = await request.get('/mock/commend')
+  const mockComment = []
+  // await request.get('/mock/commend')
   aryComment.value = (areaCommnet || []).concat(mockComment || [])
   loading.value = false
 })
